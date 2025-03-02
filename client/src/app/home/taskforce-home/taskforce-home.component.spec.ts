@@ -8,8 +8,8 @@ describe('TaskforceHomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskforceHomeComponent ]
-    })
+    imports: [TaskforceHomeComponent]
+})
     .compileComponents();
   }));
 

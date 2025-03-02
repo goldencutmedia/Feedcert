@@ -8,12 +8,21 @@ import {CompanyService} from '../company-service.service';
 import {SnackbarService} from '../../services/snackbar.service';
 import {Observable} from 'rxjs';
 import {LoginService} from '../../login/login.service';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatList, MatListItem } from '@angular/material/list';
+import { NgFor, NgClass, NgIf } from '@angular/common';
+import { ExtendedModule } from '@angular/flex-layout/extended';
+import { MatLine } from '@angular/material/core';
+import { MatDivider } from '@angular/material/divider';
+import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
 
 @Component({
-  selector: 'app-company-overview',
-  templateUrl: './company-overview.component.html',
-  styleUrls: ['./company-overview.component.scss'],
-  standalone: false
+    selector: 'app-company-overview',
+    templateUrl: './company-overview.component.html',
+    styleUrls: ['./company-overview.component.scss'],
+    imports: [MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatDivider, NgIf, BaseFormComponent]
 })
 export class CompanyOverviewComponent implements OnInit {
   companies: Company[] = [];

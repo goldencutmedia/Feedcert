@@ -8,8 +8,8 @@ describe('ToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolbarComponent ]
-    })
+    imports: [ToolbarComponent]
+})
     .compileComponents();
   }));
 

@@ -10,14 +10,14 @@ import {HashLocationStrategy, LocationStrategy, registerLocaleData} from '@angul
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
 import {CoreModule} from '@angular/flex-layout';
-import {LoginModule} from '../login/login.module';
-import {HomeModule} from '../home/home.module';
-import {ToolbarModule} from '../shared module/toolbar/toolbar.module';
+
+
+
 import {SampleModule} from '../sample/sample.module';
 import {ConfirmationDialogComponent} from '../shared module/confirmation-dialog/confirmation-dialog.component';
-import {RegisterModule} from '../register/register.module';
+
 import {FormDialogComponent} from '../shared module/form-dialog/form-dialog.component';
-import {SharedModule} from '../shared module/shared.module';
+
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
@@ -29,33 +29,26 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
 
 
 @NgModule({
-  imports: [
+    imports: [
     AppComponent,
     BrowserModule,
     CoreModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    LoginModule,
-    HomeModule,
-    RegisterModule,
-    ToolbarModule,
     SampleModule,
     MatSidenavModule,
-    SharedModule
-  ],
-  declarations: [
-    PageNotFoundComponent,
-  ],
-  providers: [
-    ApiService,
-    LoginService,
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-    {provide: MAT_DATE_LOCALE, useValue: 'de-DE'},
-    {provide: LocationStrategy, useClass: HashLocationStrategy}
-  ],
-  bootstrap: [AppComponent],
+    PageNotFoundComponent
+],
+    providers: [
+        ApiService,
+        LoginService,
+        { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },
+        { provide: LocationStrategy, useClass: HashLocationStrategy }
+    ],
+    bootstrap: [AppComponent],
 })
 export class AppModule {
 }

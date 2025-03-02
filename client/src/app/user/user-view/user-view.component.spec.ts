@@ -8,8 +8,8 @@ describe('CompanyViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserViewComponent ]
-    })
+    imports: [UserViewComponent]
+})
     .compileComponents();
   }));
 

@@ -8,8 +8,8 @@ describe('SupplierOverviewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SupplierOverviewComponent ]
-    })
+    imports: [SupplierOverviewComponent]
+})
     .compileComponents();
   }));
 

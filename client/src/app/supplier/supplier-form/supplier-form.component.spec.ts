@@ -8,8 +8,8 @@ describe('SupplierFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SupplierFormComponent ]
-    })
+    imports: [SupplierFormComponent]
+})
     .compileComponents();
   }));
 

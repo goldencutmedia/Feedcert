@@ -3,12 +3,20 @@ import {SampleDataService} from "../../sample/sample-data.service";
 import {Sample} from "../../sample/sample";
 import {Action} from "../../shared module/action/Action";
 import {DialogService} from "../../services/dialog.service";
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/material/card';
+import { MatTable, MatColumnDef, MatCellDef, MatCell, MatRowDef, MatRow } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatChip } from '@angular/material/chips';
+import { SummaryComponent } from '../summary/summary.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-standard-home',
-  templateUrl: './standard-home.component.html',
-  styleUrls: ['./standard-home.component.scss'],
-  standalone: false
+    selector: 'app-standard-home',
+    templateUrl: './standard-home.component.html',
+    styleUrls: ['./standard-home.component.scss'],
+    imports: [MatGridList, MatGridTile, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatSort, FlexModule, MatColumnDef, MatCellDef, MatCell, MatChip, MatRowDef, MatRow, SummaryComponent, DatePipe]
 })
 export class StandardHomeComponent implements OnInit {
 

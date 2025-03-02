@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {UserOverviewComponent} from "./user-overview/user-overview.component";
-import { SharedModule } from '../shared module/shared.module';
+
 
 
 const routes: Routes = [
@@ -14,9 +14,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
-    SharedModule
-  ],
+    RouterModule.forChild(routes)
+],
   exports: [RouterModule]
 })
 export class UserRoutingModule {

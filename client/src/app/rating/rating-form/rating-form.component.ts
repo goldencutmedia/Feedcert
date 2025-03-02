@@ -2,12 +2,19 @@ import {Component, OnInit} from '@angular/core';
 import {Rating} from '../rating';
 import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard } from '@angular/material/card';
+import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
+import { MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
+import { MatIconButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-rating-form',
-  templateUrl: './rating-form.component.html',
-  styleUrls: ['./rating-form.component.scss'],
-  standalone: false
+    selector: 'app-rating-form',
+    templateUrl: './rating-form.component.html',
+    styleUrls: ['./rating-form.component.scss'],
+    imports: [MatGridList, MatGridTile, MatCard, BaseFormComponent, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatIconButton, MatTooltip, MatIcon, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow]
 })
 export class RatingFormComponent implements OnInit {
   formData = {

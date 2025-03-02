@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {SampleDataService} from "../../sample/sample-data.service";
+import { MatList, MatListItem } from '@angular/material/list';
+import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  selector: 'app-summary',
-  templateUrl: './summary.component.html',
-  styleUrls: ['./summary.component.scss'],
-  standalone: false
+    selector: 'app-summary',
+    templateUrl: './summary.component.html',
+    styleUrls: ['./summary.component.scss'],
+    imports: [MatList, MatListItem, MatDivider]
 })
 export class SummaryComponent implements OnInit {
   samplesTotal!: number;

@@ -9,12 +9,28 @@ import {Observable} from "rxjs";
 import {COMPANY_FORM_DATA} from "../../company/company-form/company-form-data";
 import {Action} from "../../shared module/action/Action";
 import {SAMPLE_FORM_DATA} from "../sample-form/sample-form-data";
+import { NgIf, NgFor, NgClass, AsyncPipe } from '@angular/common';
+import { MatAnchor } from '@angular/material/button';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatList, MatListItem } from '@angular/material/list';
+import { ExtendedModule } from '@angular/flex-layout/extended';
+import { MatLine, MatOption } from '@angular/material/core';
+import { MatChip } from '@angular/material/chips';
+import { MatDivider } from '@angular/material/divider';
+import { MatTabGroup, MatTab } from '@angular/material/tabs';
+import { MatFormField } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
+import { SafePipe } from 'safe-pipe';
 
 @Component({
-  selector: 'app-sample-overview',
-  templateUrl: './sample-overview.component.html',
-  styleUrls: ['./sample-overview.component.scss'],
-  standalone: false
+    selector: 'app-sample-overview',
+    templateUrl: './sample-overview.component.html',
+    styleUrls: ['./sample-overview.component.scss'],
+    imports: [NgIf, MatAnchor, MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatChip, MatDivider, MatTabGroup, MatTab, MatFormField, MatSelect, FormsModule, MatOption, BaseFormComponent, AsyncPipe, SafePipe]
 })
 export class SampleOverviewComponent implements OnInit {
   samples!: Sample[];

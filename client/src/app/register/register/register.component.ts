@@ -1,13 +1,21 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import {RegisterService} from "../register.service";
 import {ActivatedRoute} from "@angular/router";
+import { FlexModule } from '@angular/flex-layout/flex';
+import { GridModule } from '@angular/flex-layout/grid';
+import { MatCard, MatCardContent, MatCardActions } from '@angular/material/card';
+import { MatFormField, MatError } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { NgClass, NgIf } from '@angular/common';
+import { ExtendedModule } from '@angular/flex-layout/extended';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  standalone: false
+    selector: 'app-register',
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
+    imports: [FlexModule, GridModule, MatCard, FormsModule, ReactiveFormsModule, MatCardContent, MatFormField, MatInput, NgClass, ExtendedModule, NgIf, MatError, MatCardActions, MatButton]
 })
 export class RegisterComponent implements OnInit {
 

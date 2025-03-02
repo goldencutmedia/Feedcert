@@ -4,12 +4,16 @@ import {Supplier} from "./supplier";
 import {Router} from "@angular/router";
 import {ApiService} from "../../services/api.service";
 import {FileService} from "../../services/file.service";
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
+import { FlexModule } from '@angular/flex-layout/flex';
 
 @Component({
-  selector: 'app-supplier-form',
-  templateUrl: './supplier-form.component.html',
-  styleUrls: ['./supplier-form.component.scss'],
-  standalone: false
+    selector: 'app-supplier-form',
+    templateUrl: './supplier-form.component.html',
+    styleUrls: ['./supplier-form.component.scss'],
+    imports: [MatGridList, MatGridTile, MatCard, BaseFormComponent, MatCardContent, FlexModule]
 })
 export class SupplierFormComponent implements OnInit {
 

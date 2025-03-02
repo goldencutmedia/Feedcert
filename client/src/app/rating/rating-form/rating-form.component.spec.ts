@@ -8,8 +8,8 @@ describe('RankingFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RankingFormComponent ]
-    })
+    imports: [RankingFormComponent]
+})
     .compileComponents();
   }));
 

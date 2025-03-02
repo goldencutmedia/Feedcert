@@ -1,16 +1,23 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
+import { MatDialogRef, MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
 import {UploadService} from '../upload/upload.service';
 import {forkJoin} from 'rxjs';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatButton } from '@angular/material/button';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { MatList, MatListItem } from '@angular/material/list';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
+import { MatLine } from '@angular/material/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 class DialogComponent {
 }
 
 @Component({
-  selector: 'app-upload-dialog',
-  templateUrl: './upload-dialog.component.html',
-  styleUrls: ['./upload-dialog.component.scss'],
-  standalone: false
+    selector: 'app-upload-dialog',
+    templateUrl: './upload-dialog.component.html',
+    styleUrls: ['./upload-dialog.component.scss'],
+    imports: [FlexModule, MatDialogTitle, MatButton, CdkScrollable, MatDialogContent, MatList, NgFor, MatListItem, MatLine, NgIf, MatProgressBar, MatDialogActions, MatDialogClose, AsyncPipe]
 })
 
 

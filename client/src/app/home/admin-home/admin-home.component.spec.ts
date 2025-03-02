@@ -8,8 +8,8 @@ describe('AdminHomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminHomeComponent ]
-    })
+    imports: [AdminHomeComponent]
+})
     .compileComponents();
   }));
 

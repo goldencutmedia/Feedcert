@@ -8,8 +8,8 @@ describe('DocumentViewerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DocumentViewerComponent ]
-    })
+    imports: [DocumentViewerComponent]
+})
     .compileComponents();
   }));
 

@@ -8,8 +8,8 @@ describe('SupplierViewComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SupplierViewComponent ]
-    })
+    imports: [SupplierViewComponent]
+})
     .compileComponents();
   }));
 

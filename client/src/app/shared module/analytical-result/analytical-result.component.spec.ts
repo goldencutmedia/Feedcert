@@ -8,8 +8,8 @@ describe('AnalyticalResultComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AnalyticalResultComponent ]
-    })
+    imports: [AnalyticalResultComponent]
+})
     .compileComponents();
   }));
 

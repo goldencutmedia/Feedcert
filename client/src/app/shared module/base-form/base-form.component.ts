@@ -1,15 +1,30 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {FormControl} from '@angular/forms';
-import {MatChipInputEvent} from '@angular/material/chips';
-import {MatAutocomplete, MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatChipInputEvent, MatChip, MatChipRemove, MatChipInput } from '@angular/material/chips';
+import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { GridModule } from '@angular/flex-layout/grid';
+import { MatCardContent, MatCardActions } from '@angular/material/card';
+import { NgFor, NgSwitch, NgSwitchCase, NgSwitchDefault, NgIf } from '@angular/common';
+import { MatLabel, MatFormField, MatSuffix } from '@angular/material/form-field';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatInput } from '@angular/material/input';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { MatIcon } from '@angular/material/icon';
+import { MatDatepickerInput, MatDatepickerToggle, MatDatepicker } from '@angular/material/datepicker';
+import { MatButtonToggleGroup, MatButtonToggle } from '@angular/material/button-toggle';
+import { AnalyticalResultComponent } from '../analytical-result/analytical-result.component';
+import { MatButton } from '@angular/material/button';
 
 @Component({
-  selector: 'app-base-form',
-  templateUrl: './base-form.component.html',
-  styleUrls: ['./base-form.component.scss'],
-  standalone: false
+    selector: 'app-base-form',
+    templateUrl: './base-form.component.html',
+    styleUrls: ['./base-form.component.scss'],
+    imports: [FormsModule, FlexModule, GridModule, MatCardContent, NgFor, NgSwitch, NgSwitchCase, MatLabel, MatCheckbox, MatFormField, MatInput, CdkTextareaAutosize, MatSelect, MatOption, MatChip, MatIcon, MatChipRemove, MatAutocompleteTrigger, MatChipInput, ReactiveFormsModule, MatAutocomplete, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatButtonToggleGroup, MatButtonToggle, AnalyticalResultComponent, NgSwitchDefault, NgIf, MatCardActions, MatButton]
 })
 export class BaseFormComponent implements OnInit {
   @Input() formData!: {

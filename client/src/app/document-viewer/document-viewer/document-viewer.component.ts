@@ -2,12 +2,21 @@ import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs';
 import {LoginService} from '../../login/login.service';
 import {ApiService} from '../../services/api.service';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { MatList, MatListItem } from '@angular/material/list';
+import { NgFor, NgClass } from '@angular/common';
+import { ExtendedModule } from '@angular/flex-layout/extended';
+import { MatLine } from '@angular/material/core';
+import { MatDivider } from '@angular/material/divider';
+import { SafePipe } from 'safe-pipe';
 
 @Component({
-  selector: 'app-document-viewer',
-  templateUrl: './document-viewer.component.html',
-  styleUrls: ['./document-viewer.component.scss'],
-  standalone: false
+    selector: 'app-document-viewer',
+    templateUrl: './document-viewer.component.html',
+    styleUrls: ['./document-viewer.component.scss'],
+    imports: [MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatDivider, SafePipe]
 })
 
 export class DocumentViewerComponent implements OnInit {

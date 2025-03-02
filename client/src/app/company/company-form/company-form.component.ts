@@ -4,12 +4,17 @@ import {Company} from './company';
 import {Router} from '@angular/router';
 import {ApiService} from '../../services/api.service';
 import {FileService} from '../../services/file.service';
+import { MatAnchor } from '@angular/material/button';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
+import { FlexModule } from '@angular/flex-layout/flex';
 
 @Component({
-  selector: 'app-company-form',
-  templateUrl: './company-form.component.html',
-  styleUrls: ['./company-form.component.scss'],
-  standalone: false
+    selector: 'app-company-form',
+    templateUrl: './company-form.component.html',
+    styleUrls: ['./company-form.component.scss'],
+    imports: [MatAnchor, MatGridList, MatGridTile, MatCard, BaseFormComponent, MatCardContent, FlexModule]
 })
 export class CompanyFormComponent implements OnInit {
 

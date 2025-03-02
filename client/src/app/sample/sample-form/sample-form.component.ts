@@ -7,13 +7,24 @@ import {LoginService} from '../../login/login.service';
 import {forkJoin, Observable, Subject} from 'rxjs';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
 import {SampleDataService} from '../sample-data.service';
-import {FormControl} from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatGridList, MatGridTile } from '@angular/material/grid-list';
+import { MatCard, MatCardContent } from '@angular/material/card';
+import { FlexModule } from '@angular/flex-layout/flex';
+import { GridModule } from '@angular/flex-layout/grid';
+import { MatFormField, MatHint } from '@angular/material/form-field';
+import { MatSelect } from '@angular/material/select';
+import { MatOption } from '@angular/material/core';
+import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-sample-form',
-  templateUrl: './sample-form.component.html',
-  styleUrls: ['./sample-form.component.scss'],
-  standalone: false
+    selector: 'app-sample-form',
+    templateUrl: './sample-form.component.html',
+    styleUrls: ['./sample-form.component.scss'],
+    imports: [MatGridList, MatGridTile, MatCard, FlexModule, GridModule, MatFormField, MatSelect, FormsModule, ReactiveFormsModule, MatOption, MatHint, BaseFormComponent, MatCardContent, MatMiniFabButton, MatTooltip, MatIcon]
 })
 
 export class SampleFormComponent implements OnInit {
