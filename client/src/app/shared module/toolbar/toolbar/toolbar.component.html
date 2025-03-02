@@ -1,0 +1,20 @@
+<mat-toolbar *ngIf="isLoggedIn | async">
+  <mat-toolbar-row fxFlexFill fxLayoutAlign="start" gdColumns="1fr 100px">
+    <!--    <button mat-icon-button>-->
+    <!--      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>-->
+    <!--    </button>-->
+    <div>
+      <a mat-flat-button [routerLink]="'/'">Dashboard</a>
+      <a mat-flat-button *ngIf="!(isAdministrator | async)" [routerLink]="'/samples'">Übersicht Analysen</a>
+      <a mat-flat-button *ngIf="isStandard | async" [routerLink]="'/samples/new'">Neue Analyse erfassen</a>
+      <a mat-flat-button [routerLink]="'/companies'">GOETE PLUS Partner</a>
+      <a mat-flat-button *ngIf="isAdministrator | async" [routerLink]="'/companies/new'">Neuen Goete Partner anlegen</a>
+      <a mat-flat-button *ngIf="isAdministrator | async" [routerLink]="'/users'">Benutzer</a>
+    </div>
+    <div fxLayoutAlign="end">
+      <a (click)="logout()" mat-icon-button aria-label="Example icon-button with a heart icon">
+        <mat-icon class="fas fa-power-off"></mat-icon>
+      </a>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

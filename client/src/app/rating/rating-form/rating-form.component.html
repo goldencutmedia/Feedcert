@@ -1,0 +1,56 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Bewertungsmatrix verwalten</h1>
+  <mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile [colspan]="1" [rowspan]="4">
+      <mat-card class="dashboard-card">
+        <app-base-form
+          [formData]="formData"
+          [buttons]="['ADD']"
+          [formObject]="rating"
+          (save)="addRating()"
+        ></app-base-form>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="7">
+      <mat-card class="dashboard-card">
+        <table style="width: 100%" mat-table [dataSource]="ratings">
+
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Pos.</th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="defect">
+            <th mat-header-cell *matHeaderCellDef> Mangel</th>
+            <td mat-cell *matCellDef="let element"> {{element.defect}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Beschreibung Mangel</th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="points">
+            <th mat-header-cell *matHeaderCellDef> Punkte</th>
+            <td mat-cell *matCellDef="let element"> {{element.points}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button matTooltip="Eintrag löschen">
+                <mat-icon (click)="onClickDelete(element)">clear</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="ratingColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: ratingColumns;"></tr>
+        </table>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+

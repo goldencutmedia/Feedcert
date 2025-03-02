@@ -1,0 +1,56 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Analyse erfassen</h1>
+  <mat-grid-list cols="2" rowHeight="900px">
+    <mat-grid-tile [colspan]="1">
+      <mat-card class="dashboard-card" fxLayout="row" gdRows="100px 1fr">
+        <div class="first">
+          <mat-form-field style="width: 100%; padding-right: 20px; margin-bottom: 20px; font-size: 14px">
+            <mat-select [formControl]="switchControl" placeholder="Art der Partie" name="parttype">
+              <mat-option value="single">Einzelpartie</mat-option>
+              <mat-option value="mix">Mischpartie</mat-option>
+            </mat-select>
+            <mat-hint>Bitte wählen Sie die Art der Partie aus.</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="second" [hidden]="formHidden">
+          <app-base-form
+            [formData]="formData"
+            [buttons]="['CANCEL', 'ADD']"
+            [formObject]="sample"
+            (save)="addSample()"
+            (cancel)="cancel()"></app-base-form>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content fxFlexFill fxLayout="row" gdRows="60px 1fr">
+          <input type="file" #file style="display: none" (change)="onFilesAdded()"
+                 accept="application/pdf" single/>
+          <div class="buttons" fxLayout="row" fxLayoutAlign="end" fxLayoutGap="0px">
+            <button
+              [hidden]="!uploadSuccessful"
+              mat-mini-fab
+              color="primary"
+              (click)="deleteFiles()"
+              matTooltip="Prüfbericht löschen">
+              <mat-icon fontSet="fas" fontIcon="fa-trash"></mat-icon>
+            </button>
+            <button
+              [hidden]="uploading || uploadSuccessful"
+              mat-mini-fab
+              color="primary"
+              (click)="addFiles()"
+              matTooltip="Prüfbericht als PDF hochladen">
+              <mat-icon fontSet="fas" fontIcon="fa-plus"></mat-icon>
+            </button>
+          </div>
+          <iframe class="file-viewer" src="" #fileViewer></iframe>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+
+

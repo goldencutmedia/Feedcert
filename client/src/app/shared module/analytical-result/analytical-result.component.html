@@ -1,0 +1,45 @@
+<form [formGroup]="analyticForm" fxLayout="column" fxLayoutAlign="start" gdAlignColumns="start"
+      gdColumns="16% 16% 16% 16% 16% 16%">
+  <mat-form-field gdColumn="span 2">
+    <input matInput class="new-sample"
+           placeholder="GVO in %"
+           formControlName="gvo"
+           type="number"
+    />
+  </mat-form-field>
+  <ng-container formArrayName="substances"
+                *ngFor="let substance of substancesFormGroup.controls; let i = index;">
+    <ng-container [formGroupName]="i">
+      <mat-form-field gdColumn="span 3 / 1">
+        <input matInput class="new-sample"
+               placeholder="Wirkstoff"
+               formControlName="substancename"
+               type="text"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput class="new-sample"
+               placeholder="mg/kg"
+               formControlName="substancevalue"
+               type="number"
+        />
+      </mat-form-field>
+      <button
+        mat-mini-fab
+        color="secondary"
+        (click)="removeSubstance(i)"
+        matTooltip="Wirkstoff löschen"
+        *ngIf="substanceArray.length > 1 && !disabled">
+        <mat-icon fontSet="fas" fontIcon="fa-minus"></mat-icon>
+      </button>
+    </ng-container>
+  </ng-container>
+</form>
+<button
+  mat-mini-fab
+  color="secondary"
+  (click)="addSubstance()"
+  matTooltip="Weiterer Wirkstoff"
+  *ngIf="!disabled">
+  <mat-icon fontSet="fas" fontIcon="fa-plus"></mat-icon>
+</button>

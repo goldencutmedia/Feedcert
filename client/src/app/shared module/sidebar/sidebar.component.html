@@ -1,0 +1,44 @@
+<div class="sidebar-container" fxFlexFill fxLayoutAlign="start" gdRows="60px 1fr 60px">
+
+  <img src="../../../assets/img/Goete-Plus-Siegel.jpg"/>
+  <!--    <button mat-icon-button>-->
+  <!--      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>-->
+  <!--    </button>-->
+  <div *ngIf="isLoggedIn | async" class="navigation-list">
+    <mat-nav-list>
+      <app-sidebarbutton [text]="'Dashboard'" [link]="'/home'" [iconCls]="'tachometer-alt'"></app-sidebarbutton>
+    </mat-nav-list>
+    <mat-nav-list class="navigation-list">
+      <app-sidebarbutton [text]="'Übersicht Analysen'" [link]="'/samples'" [iconCls]="'copy'"
+                         *ngIf="(isStandard | async) || (isTaskforce | async)"></app-sidebarbutton>
+      <app-sidebarbutton [text]="'Neue Analyse anlegen'" [link]="'/samples/new'" [iconCls]="'copy'" [addIcon]="true"
+                         *ngIf="isStandard | async"></app-sidebarbutton>
+    </mat-nav-list>
+    <mat-nav-list class="navigation-list">
+      <app-sidebarbutton [text]="'GOETE PLUS Partner'" [link]="'/companies'"
+                         [iconCls]="'building'"></app-sidebarbutton>
+      <app-sidebarbutton [text]="'Neuen Goete Partner anlegen'" [link]="'/companies/new'" [iconCls]="'building'"
+                         [addIcon]="true" *ngIf="isAdministrator | async"></app-sidebarbutton>
+    </mat-nav-list>
+    <mat-nav-list class="navigation-list">
+      <app-sidebarbutton [text]="'Übersicht Lieferanten'" [link]="'/suppliers'" [iconCls]="'truck'"></app-sidebarbutton>
+      <app-sidebarbutton [text]="'Neuen Lieferanten anlegen'" [link]="'/suppliers/new'" [iconCls]="'truck'"
+                         [addIcon]="true"></app-sidebarbutton>
+    </mat-nav-list>
+    <mat-nav-list class="navigation-list">
+      <app-sidebarbutton [text]="'Dokumentenanzeige'" [link]="'/documents'" [iconCls]="'file-pdf'"></app-sidebarbutton>
+    </mat-nav-list>
+    <mat-nav-list class="navigation-list administrator" *ngIf="isAdministrator | async">
+      <app-sidebarbutton [text]="'Benutzer verwalten'" [link]="'/users'" [iconCls]="'user'"
+      ></app-sidebarbutton>
+      <app-sidebarbutton [text]="'Bewertungsmatrix verwalten'" [link]="'/rating'" [iconCls]="'star'"
+      ></app-sidebarbutton>
+    </mat-nav-list>
+  </div>
+  <div>
+    <div *ngIf="isLoggedIn | async" class="navigation-list">
+      <mat-nav-list>
+        <app-sidebarbutton (click)="logout()" [text]="'Abmelden'" [iconCls]="'power-off'"></app-sidebarbutton>
+      </mat-nav-list>
+    </div>
+  </div>

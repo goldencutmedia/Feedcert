@@ -1,0 +1,11 @@
+<div mat-dialog-title>{{data.title}}</div>
+<div mat-dialog-content fxLayoutAlign="center center">
+  <app-base-form fxFlexFill
+                 [formData]="data.formData"
+                 [formObject]="data.formObject">
+  </app-base-form>
+</div>
+<div mat-dialog-actions fxLayoutAlign="center center">
+  <button mat-button (click)="onCancelClick()">Abbrechen</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</div>

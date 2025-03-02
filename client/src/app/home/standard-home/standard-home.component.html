@@ -1,0 +1,62 @@
+<mat-grid-list cols="3" rowHeight="350px">
+  <mat-grid-tile [colspan]="3" [rowspan]="1">
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title i18n>
+          Offene Maßnahmen
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <table matSort mat-table [dataSource]="samples" fxFlexFill>
+
+          <ng-container matColumnDef="date">
+            <td mat-cell style="width:100px"
+                *matCellDef="let element"> {{element.reportdate | date:'dd.MM.yy'}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="type">
+            <td mat-cell style="width:200px" *matCellDef="let element"> {{element.type}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <td mat-cell style="width:1fr" *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="state">
+            <td mat-cell style="width:200px;" *matCellDef="let element">
+              <mat-chip-list>
+                <mat-chip (click)="onSelectChip(element)" color="{{mapState(element.state).color}}"
+                          selected>{{mapState(element.state).text}}</mat-chip>
+              </mat-chip-list>
+            </td>
+          </ng-container>
+
+          <tr mat-row *matRowDef="let row; columns: sampleTableColumns;"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1">
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title i18n>
+          Zusammenfassung
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+        <app-summary></app-summary>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2" [rowspan]="1">
+    <mat-card class="dashboard-card">
+      <mat-card-header>
+        <mat-card-title i18n>
+
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="dashboard-card-content">
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

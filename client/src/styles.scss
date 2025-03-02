@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;  // Correct syntax for Angular 17+
+@use 'variables';
+@use './theme' as theme;
+
+@include mat.core(); 
+
+$feedcert-scheme: (
+  50: #e4f0e0,
+  100: #bcd9b3,
+  200: #90c080,
+  300: #63a64d,
+  400: #419326,
+  500: #208000,
+  600: #1c7800,
+  700: #186d00,
+  800: #136300,
+  900: #0b5000,
+  A100: #8bff83,
+  A200: #5bff50,
+  A400: #2bff1d,
+  A700: #13ff03,
+  contrast: (
+    50: mat.$dark-primary-text,
+    100: mat.$dark-primary-text,
+    200: mat.$dark-primary-text,
+    300: mat.$dark-primary-text,
+    400: mat.$dark-primary-text,
+    500: mat.$light-primary-text,
+    600: mat.$light-primary-text,
+    700: mat.$light-primary-text,
+    800: mat.$light-primary-text,
+    900: mat.$light-primary-text,
+    A100: mat.$dark-primary-text,
+    A200: mat.$dark-primary-text,
+    A400: mat.$dark-primary-text,
+    A700: mat.$dark-primary-text,
+  )
+);
+
+$app-primary: mat.define-palette(
+  $feedcert-scheme,
+  (
+    main: 500,
+    lighter: 100,
+    darker: 900
+  )
+);
+$app-accent: mat.define-palette(
+  mat.$amber-palette, 
+  (
+    main: A200,
+    lighter: A100,
+    darker: A400
+  )
+);
+$app-theme: mat.define-theme((
+  color: (primary: theme.$app-primary, accent: $app-accent)
+));
+
+@include mat.all-component-themes($app-theme);
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  padding: 0px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.grid-container {
+  margin: 20px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  overflow: auto;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  text-align: center;
+}

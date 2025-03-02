@@ -1,0 +1,165 @@
+<form fxFlexFill fxLayout="row" gdRows="1fr 56px">
+  <mat-card-content fxLayoutAlign="start" gdAlignColumns="start" fxLayoutGap="20px"
+                    gdColumns="1fr 1fr 1fr 1fr 1fr 1fr">
+    <ng-container *ngFor="let comp of formData.fields">
+      <ng-container [ngSwitch]="comp.type">
+        <ng-container *ngSwitchCase="'subtitle'">
+          <mat-label class="mat-subheading-1" gdColumn="span 6">{{comp.label}}</mat-label>
+        </ng-container>
+        <ng-container *ngSwitchCase="'checkbox'">
+          <mat-checkbox [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}"
+                        class="new-sample"
+                        [(ngModel)]="formObject[comp.name]"
+                        name="{{comp.name}}"
+                        [required]="comp.required"
+                        [disabled]="comp.readOnly || readOnly">
+            {{comp.label}}
+          </mat-checkbox>
+        </ng-container>
+        <ng-container *ngSwitchCase="'textarea'">
+          <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
+                    <textarea matInput
+                              cdkTextareaAutosize
+                              #autosize="cdkTextareaAutosize"
+                              cdkAutosizeMinRows="{{comp.lines}}"
+                              cdkAutosizeMaxRows="{{comp.lines + 4}}"
+                              class="new-sample"
+                              placeholder="{{comp.label}}"
+                              [(ngModel)]="formObject[comp.name]"
+                              name="{{comp.name}}"
+                              [required]="comp.required"
+                              [disabled]="comp.readOnly || readOnly">
+                    </textarea>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngSwitchCase="'select'">
+          <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
+            <mat-select placeholder="{{comp.label}}"
+                        [(ngModel)]="formObject[comp.name]"
+                        name="{{comp.name}}"
+                        [required]="comp.required "
+                        [disabled]="comp.readOnly || readOnly">
+              <mat-option *ngFor="let option of comp.options" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngSwitchCase="'chips'">
+          <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
+            <mat-chip-list #chipList aria-label="Chip selection">
+              <mat-chip
+                *ngFor="let object of formObject[comp.name]"
+                [selectable]="false"
+                [removable]="true"
+                (removed)="onChipRemoved(object, formObject[comp.name])">
+                {{object}}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+              <input
+                  #chipInput
+                  [formControl]="chipCtrl"
+                  [matAutocomplete]="chipAuto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="onChipAdded($event, formObject[comp.name])">
+            </mat-chip-list>
+            <mat-autocomplete #chipAuto="matAutocomplete"
+                              (optionSelected)="onChipSelected($event, formObject[comp.name])">
+              <mat-option *ngFor="let option of comp.options" [value]="option.value">
+                {{option.value}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngSwitchCase="'date'">
+          <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
+            <input matInput [matDatepicker]="picker"
+                   class="new-sample"
+                   placeholder="{{comp.label}}"
+                   [(ngModel)]="formObject[comp.name]"
+                   name="{{comp.name}}"
+                   [required]="comp.required"
+                   [disabled]="comp.readOnly || readOnly"/>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </ng-container>
+        <ng-container *ngSwitchCase="'autocomplete'">
+          <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
+            <input matInput class="new-sample"
+                   placeholder="{{comp.label}}"
+                   [(ngModel)]="formObject[comp.name]"
+                   name="{{comp.name}}"
+                   type="text"
+                   [required]="comp.required"
+                   [disabled]="comp.readOnly || readOnly"
+                   [matAutocomplete]="auto"/>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let option of comp.options" [value]="option.value">
+                {{option.label}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+        </ng-container>
+        <ng-container *ngSwitchCase="'toggleButton'">
+          <mat-button-toggle-group [hidden]="comp.hidden"
+                                   gdColumn="span {{comp.span || 3}}"
+                                   appearance="legacy"
+                                   name="{{comp.name}}"
+                                   [disabled]="comp.readOnly || readOnly">
+            <mat-button-toggle *ngFor="let option of comp.options" value="{{option.value}}">{{option.label}}
+            </mat-button-toggle>
+          </mat-button-toggle-group>
+        </ng-container>
+        <ng-container *ngSwitchCase="'analyticalresult'">
+          <app-analytical-result
+            gdColumn="span 6"
+            [formObject]="formObject"
+            [disabled]="comp.readOnly || readOnly">
+          </app-analytical-result>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+          <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
+            <input matInput class="new-sample"
+                   placeholder="{{comp.label}}"
+                   [(ngModel)]="formObject[comp.name]"
+                   name="{{comp.name}}"
+                   type="{{comp.type}}"
+                   [required]="comp.required"
+                   [disabled]="comp.readOnly || readOnly"/>
+          </mat-form-field>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+  </mat-card-content>
+  <mat-card-actions *ngIf="!readOnly" fxLayoutAlign="end" class=" sample-app-card-buttons">
+    <ng-container *ngFor="let button of buttons">
+      <ng-container [ngSwitch]="button">
+        <ng-container *ngSwitchCase="'CANCEL'">
+          <button mat-raised-button (click)="onCancel()" color="secondary">Abbrechen</button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'SAVE'">
+          <button (click)="onSave()" mat-raised-button color="primary">Speichern</button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'ADD'">
+          <button (click)="onAdd()" mat-raised-button color="primary">Anlegen</button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'OK'">
+          <button (click)="onOk()" mat-raised-button color="primary">Bestätigen</button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'DELETE'">
+          <button (click)="onDelete()" mat-button color="secondary">Löschen</button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'SHOW_PDF'">
+          <button (click)="onShowPdf()" mat-button color="secondary">Prüfbericht anzeigen</button>
+        </ng-container>
+        <ng-container *ngSwitchCase="'SEND_MAIL'">
+          <button (click)="onSendMail()" mat-button color="secondary">Registrierunglink senden</button>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+  </mat-card-actions>
+</form>

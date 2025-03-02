@@ -1,0 +1,7 @@
+<mat-list-item [routerLink]="link" [matTooltip]="text">
+  <div class="wrapper" style="position:relative">
+    <mat-icon class="navigation-icon" [ngClass]="'fas fa-' + iconCls"></mat-icon>
+    <mat-icon *ngIf="addIcon"
+              class="navigation-plus-icon fas fa-plus"></mat-icon>
+  </div>
+</mat-list-item>

@@ -1,0 +1,29 @@
+@import '../../../styles';
+
+mat-list-item {
+  text-align: center;
+  background-color: $app-dark-background;
+  font-weight: normal;
+  font-size: 18px;
+  text-decoration: none;
+
+  &.active {
+    background-color: dimgrey;
+  }
+
+  mat-icon {
+    color: $app-light-grey;
+    font-size: 18px;
+  }
+
+  .navigation-plus-icon {
+    font-size: 10px;
+    position: absolute;
+    top: 0;
+    left: 14px;
+  }
+}
+
+.buttonMenu {
+  margin-left: 50px;
+}

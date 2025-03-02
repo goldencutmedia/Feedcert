@@ -1,0 +1,19 @@
+.summary {
+  padding: 0 20px;
+  text-align: left;
+
+  .mat-subheading-1 {
+    font-weight: bold;
+    text-align: left;
+  }
+
+  mat-divider {
+    margin: 20px 0;
+  }
+
+  .samples-list {
+    mat-list-item {
+      height: 24px;
+    }
+  }
+}

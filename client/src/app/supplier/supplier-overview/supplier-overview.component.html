@@ -1,0 +1,44 @@
+<div class="grid-container">
+  <div class="header">
+    <h1 class="mat-h1">Übersicht Lieferanten</h1>
+    <a mat-raised-button color="primary" (click)="newRating()" *ngIf="(isTaskforce | async) && selected">Lieferant
+      bewerten</a>
+  </div>
+  <mat-grid-list cols="3" rowHeight="800px">
+    <mat-grid-tile [colspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content fxFlexFill>
+          <mat-list>
+            <mat-list-item [ngClass]="{'active': selected == supplier} " *ngFor="let supplier of suppliers"
+                           class="list-item"
+                           (click)=onSelect(supplier)>
+              <h4 mat-line>{{supplier.name}}</h4>
+              <p mat-line>
+                <i>{{supplier.number}}</i>
+                <img *ngIf="supplier.gopluszertified" src="../../../assets/img/Goete-Plus-Siegel.jpg"/>
+              </p>
+              <mat-chip-list style="width:150px">
+                <mat-chip color="{{mapState(supplier.rating).color}}"
+                          selected>{{supplier.rating}}</mat-chip>
+              </mat-chip-list>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2">
+      <mat-card *ngIf="selected != undefined" class="dashboard-card">
+        <app-base-form
+          [formData]="formData"
+          [buttons]="['CANCEL', 'SAVE']"
+          [formObject]="selected"
+          [readOnly]="!(isAdministrator | async)"
+          (save)="addSupplier()"
+          (delete)="deleteSupplier()"
+        >
+        </app-base-form>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

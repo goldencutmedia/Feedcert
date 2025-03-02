@@ -1,0 +1,22 @@
+@import '../../../styles';
+
+$sidebar-width: 55px;
+
+.sidebar-container {
+
+  overflow: hidden;
+
+  img {
+    width: 30px;
+    height: 30px;
+    margin: 18px 12.5px 12.5px;
+  }
+
+  max-width: $sidebar-width;
+  width: $sidebar-width;
+  background-color: $app-dark-background;
+
+  mat-nav-list {
+    margin: 10px 0;
+  }
+}

@@ -1,0 +1,5 @@
+@use './styles/theme' as theme;  // Namespace import
+
+$app-dark-background: #3d3d3d;
+$app-light-grey: mat.get-color-from-palette(theme.$app-primary, 50);
+$app-accent-color: mat.get-color-from-palette(theme.$app-accent, 200);

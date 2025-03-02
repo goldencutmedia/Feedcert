@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+// 1. Define primary palette
+$feedcert-scheme: (
+  50: #e4f0e0,
+  500: #208000,
+  contrast: (
+    50: mat.$dark-primary-text,
+    500: mat.$light-primary-text
+  )
+);
+
+$app-primary: mat.define-palette($feedcert-scheme, 500, 50, 900);

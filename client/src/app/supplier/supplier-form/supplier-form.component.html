@@ -1,0 +1,21 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Lieferant anlegen</h1>
+  <mat-grid-list cols="3" rowHeight="800px">
+    <mat-grid-tile [colspan]="2">
+      <mat-card class="dashboard-card">
+        <app-base-form
+          [formData]="formData"
+          [buttons]="['CANCEL', 'ADD']"
+          [formObject]="supplier"
+          (sendMail)="cancel()"
+          (save)="addSupplier()"></app-base-form>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content fxFlexFill>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

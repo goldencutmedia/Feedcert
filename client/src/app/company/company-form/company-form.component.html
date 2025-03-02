@@ -1,0 +1,26 @@
+<div class="grid-container">
+  <div class="header">
+    <h1 class="mat-h1">Goete Partner anlegen</h1>
+    <a mat-raised-button (click)="csvImportClicked()" color="primary">CSV Import</a>
+    <input type="file" #file style="display: none" (change)="csvImport($event)"
+           accept=".csv" single/>
+  </div>
+  <mat-grid-list cols="3" rowHeight="800px">
+    <mat-grid-tile [colspan]="2">
+      <mat-card class="dashboard-card">
+        <app-base-form
+          [formData]="formData"
+          [buttons]="['CANCEL', 'ADD']"
+          [formObject]="company"
+          (sendMail)="cancel()"
+          (save)="addCompany()"></app-base-form>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content fxFlexFill>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

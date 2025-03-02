@@ -1,0 +1,29 @@
+@import '../../../styles';
+
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .mat-raised-button {
+    height: 36px;
+  }
+}
+
+.list-item {
+  cursor: pointer;
+
+  &:hover {
+    border-left: 10px solid $app-light-grey;
+  }
+
+  &.active {
+    border-left: 10px solid $app-accent-color;
+  }
+}
+
+.file-viewer {
+  border: none;
+  height: 100%;
+  width: 100%;
+}

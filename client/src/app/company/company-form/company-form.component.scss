@@ -1,0 +1,11 @@
+@import '../../../styles';
+
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .mat-raised-button {
+    height: 36px;
+  }
+}

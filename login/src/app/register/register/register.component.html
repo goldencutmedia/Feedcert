@@ -1,0 +1,66 @@
+<main fxFlexFill fxLayout="rows" gdRows="1fr 30px">
+  <section class="register">
+    <img src="../../../assets/img/Goete-Plus-Siegel.jpg" height="auto" width="300"/>
+    <h1>Registrierung im GOETE PLUS Portal</h1>
+    <mat-card class="register-card">
+      <form [formGroup]="registerForm" (ngSubmit)="register()" class="register-form">
+        <mat-card-content>
+          <div class="row-fluid">
+            <mat-form-field fxFlexFill>
+              <input matInput placeholder="Goete Parter ID" type="text" formControlName="companyId"
+                     [ngClass]="{ 'is-invalid': submitted && f.companyId.errors }"/>
+              <mat-error *ngIf="f.companyId.errors && f.companyId.errors.required">Goete Parter ID wird benötigt
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row-fluid">
+            <mat-form-field fxFlexFill>
+              <input matInput placeholder="Benutzername" type="text" formControlName="username"
+                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }"/>
+              <mat-error *ngIf="f.username.errors && f.username.errors.required">Benutzername wird benötigt</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row-fluid">
+            <mat-form-field fxFlexFill>
+              <input matInput placeholder="Passwort" type="password" formControlName="password"
+                     [ngClass]="{ 'is-invalid': submitted && f.password.errors }"/>
+              <mat-error *ngIf="f.password.errors && f.password.errors.required">Passwort wird benötigt
+              </mat-error>
+              <mat-error *ngIf="f.password.errors && f.password.errors.minlength">Mindestens 8 Zeichen
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row-fluid">
+            <mat-form-field fxFlexFill>
+              <input matInput placeholder="Passwort erneut eingeben" type="password" formControlName="confirmPassword"
+                     [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }"/>
+              <mat-error *ngIf="f.confirmPassword.errors && f.confirmPassword.errors.required">Bitte Passwort
+                erneut eingeben
+              </mat-error>
+              <mat-error *ngIf="f.confirmPassword.errors && f.confirmPassword.errors.mustMatch">Passwörter stimmen
+                nicht überein
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <div class="row-fluid">
+          <mat-card-actions>
+            <button type="submit" mat-raised-button color="primary">Registrieren</button>
+          </mat-card-actions>
+        </div>
+      </form>
+    </mat-card>
+  </section>
+  <footer fxLayout="cols">
+    <div>
+      <span class="mat-tab-link">Goete e.V., Am Kirlesberg 13, 89365 Röfingen</span>
+    </div>
+    <div>
+      <a class="mat-tab-link" target="_blank"
+         href="http://www.goete-verband.de/neu/impressum">Impressum</a>
+      <a class="mat-tab-link" target="_blank" href="http://www.goete-verband.de/neu/datenschutz">Datenschutz</a>
+    </div>
+  </footer>
+</main>
+
+

@@ -1,0 +1,82 @@
+<div class="grid-container">
+  <div class="header">
+    <h1 class="mat-h1">Übersicht Analysen</h1>
+    <!--    <a *ngIf="isStandard | async" mat-raised-button color="primary" routerLink="/samples/new">Neue Analyse</a>-->
+    <div class="buttons">
+      <a *ngIf="isTaskforce | async" [hidden]="selected == undefined" mat-raised-button color="primary"
+         (click)="setActionSelected()">
+        {{actionButtonText}}
+      </a>
+      <a *ngIf="(isStandard| async)" [hidden]="!(selected && selected.state === 1)" mat-raised-button
+         color="primary"
+         (click)="finishSampleSelected()">
+        {{answerButtonText}}
+      </a>
+    </div>
+
+  </div>
+  <mat-grid-list cols="2" rowHeight="900px">
+    <mat-grid-tile [colspan]="1">
+      <mat-card class="dashboard-card">
+        <mat-card-content fxFlexFill>
+          <mat-list>
+            <mat-list-item [ngClass]="{'active': selected == sample}" *ngFor="let sample of samples"
+                           class="list-item"
+                           (click)=onSelect(sample)>
+              <h4 mat-line>{{sample.type}}</h4>
+              <p mat-line><i>{{sample.description}}</i></p>
+              <p *ngIf="isTaskforce | async" mat-line><i>{{sample.company.name}} ({{sample.company.number}})</i></p>
+              <mat-chip-list style="width:150px">
+                <mat-chip (click)=onSelectChip(sample) color="{{mapState(sample.state).color}}"
+                          selected>{{mapState(sample.state).text}}</mat-chip>
+              </mat-chip-list>
+              <mat-divider></mat-divider>
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1">
+      <mat-tab-group *ngIf="selected != undefined" class="dashboard-card">
+        <mat-tab label="Informationen">
+          <mat-card>
+            <div class="first">
+              <mat-form-field style="width: 100%; padding-right: 20px; margin-bottom: 20px; font-size: 14px">
+                <mat-select [ngModel]="selected['type']" placeholder="Art der Partie" name="parttype"
+                            disabled="true">
+                  <mat-option value="single">Einzelpartie</mat-option>
+                  <mat-option value="mix">Mischpartie</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+            <div class="second">
+              <app-base-form
+                [formData]="formData"
+                [buttons]="['CANCEL', 'SAVE']"
+                [formObject]="selected"
+                [readOnly]="true"
+                (save)="addSample()"
+                (delete)="deleteSample()"
+                (showPdf)="showPdf()"
+              >
+              </app-base-form>
+            </div>
+          </mat-card>
+        </mat-tab>
+        <mat-tab label="Prüfbericht" [hidden]="pdfViewerHidden">
+          <iframe class="file-viewer" [src]="pdfUrl | safe:'resourceUrl'"></iframe>
+        </mat-tab>
+        <mat-tab *ngIf="isTaskforce | async" label="Kontaktdaten">
+          <mat-card>
+            <app-base-form
+              [formData]="companyFormData"
+              [formObject]="selected.company"
+              [readOnly]="true"
+            >
+            </app-base-form>
+          </mat-card>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

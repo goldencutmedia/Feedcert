@@ -1,0 +1,36 @@
+@import '../../../styles';
+
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  .mat-raised-button {
+    height: 36px;
+  }
+}
+
+app-base-form {
+  padding: 20px 0;
+}
+
+.file-viewer {
+  width: 100%;
+  height: 700px;
+  border: none;
+}
+
+.list-item {
+  cursor: pointer;
+
+  &:hover {
+    border-left: 10px solid $app-light-grey;
+  }
+
+  &.active {
+    border-left: 10px solid $app-accent-color;
+  }
+}
+
+
+

@@ -1,0 +1,46 @@
+@import '../../../styles';
+
+
+.login {
+  margin-top: 5%;
+  text-align: center;
+  flex: 1 0 auto;
+
+  img {
+    margin-bottom: 30px;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    margin-bottom: 80px;
+  }
+
+}
+
+.login-card {
+  width: 300px;
+  margin: 0 auto;
+}
+
+footer {
+  height: 20px;
+  width: 100%;
+  padding: 0 10px;
+  justify-content: space-between;
+
+  a {
+    margin: 0 5px;
+    text-decoration: none;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      color: mat-color($app-primary)
+    }
+  }
+}
