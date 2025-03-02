@@ -32,11 +32,11 @@ export class BaseFormComponent implements OnInit {
         ]
       }
     ],
-    buttons: []
+    buttons?: []
   };
   @Input() formObject: any;
   @Input() readOnly: any;
-  @Input() buttons: any;
+  @Input() buttons?: any;
 
   @ViewChild('chipInput') chipInput!: ElementRef<HTMLInputElement>;
   @ViewChild('chipAuto') chipAutocomplete!: MatAutocomplete;

@@ -1,12 +1,15 @@
 @use '@angular/material' as mat;
 
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+
 // 1. Define primary palette
 $feedcert-scheme: (
   50: #e4f0e0,
   500: #208000,
   contrast: (
-    50: mat.$dark-primary-text,
-    500: mat.$light-primary-text
+    50: $dark-primary-text,
+    500: $light-primary-text
   )
 );
 

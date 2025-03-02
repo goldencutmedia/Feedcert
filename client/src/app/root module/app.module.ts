@@ -30,6 +30,7 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
 
 @NgModule({
   imports: [
+    AppComponent,
     BrowserModule,
     CoreModule,
     AppRoutingModule,
@@ -44,7 +45,6 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
     SharedModule
   ],
   declarations: [
-    AppComponent,
     PageNotFoundComponent,
   ],
   providers: [
