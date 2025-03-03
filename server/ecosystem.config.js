@@ -3,7 +3,7 @@ module.exports = {
         {
             name: 'FEEDCERT-API',
             script: 'index.js',
-            instances: 1,
+            instances: 'max',
             autorestart: true,
             watch: false,
             max_memory_restart: '1G',

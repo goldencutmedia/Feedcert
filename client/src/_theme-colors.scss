@@ -127,7 +127,7 @@ $_palettes: (
 );
 
 $_rest: (
-  secondary: map.get($_palettes, secondary),
+  secondary: map.get($_palettes, primary),
   neutral: map.get($_palettes, neutral),
   neutral-variant: map.get($_palettes,  neutral-variant),
   error: map.get($_palettes, error),

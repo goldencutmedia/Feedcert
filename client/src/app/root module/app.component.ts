@@ -8,8 +8,7 @@ import { SidebarComponent } from '../shared module/sidebar/sidebar.component';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true,
-  imports: [RouterModule, MatDrawerContent, SidebarComponent, MatDrawer, MatDrawerContainer]
+  standalone: false
 })
 export class AppComponent implements OnInit {
   constructor(private router: Router, private api: ApiService) {
