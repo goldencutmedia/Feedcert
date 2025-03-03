@@ -1,4 +1,5 @@
-@import '../../../styles';
+@use '../../../styles' as styles;
+
 
 .header {
   display: flex;
@@ -14,11 +15,11 @@
   cursor: pointer;
 
   &:hover {
-    border-left: 10px solid $app-light-grey;
+    border-left: 10px solid styles.$app-light-grey;
   }
 
   &.active {
-    border-left: 10px solid $app-accent-color;
+    border-left: 10px solid styles.$app-accent-color;
   }
 
   p {

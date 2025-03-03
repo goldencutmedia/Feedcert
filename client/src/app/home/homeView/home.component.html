@@ -1,8 +1,11 @@
 <div class="grid-container">
-  <div class="user-container">
-    <span class="mat-h1 company">{{(user | async).company.name}} </span>
-    <span class="user">{{(user | async).firstname}} {{(user | async).lastname}} </span>
+  <div class="user-container" *ngIf="user | async as userObj; else loading">
+    <span class="mat-h1 company">{{(user | async)?.company?.name}} </span>
+    <span class="user">{{(user | async)?.firstname}} {{(user | async)?.lastname}} </span>
   </div>
+  <ng-template #loading>
+    <mat-spinner diameter="30"></mat-spinner>
+  </ng-template>
   <app-admin-home *ngIf="isAdministrator | async"></app-admin-home>
   <app-taskforce-home *ngIf="(isTaskforce | async) && !(isAdministrator | async)"></app-taskforce-home>
   <app-standard-home *ngIf="(isStandard| async) && !(isAdministrator | async)"></app-standard-home>

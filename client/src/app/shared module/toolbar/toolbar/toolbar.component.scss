@@ -1,4 +1,4 @@
-@import '../../../../styles';
+@use '../../../../styles' as styles;
 
 $toolbar-width: 250px;
 
@@ -7,11 +7,11 @@ mat-toolbar {
 
   mat-toolbar-row {
     width: $toolbar-width;
-    background-color: $app-dark-background;
+    background-color: styles.$app-dark-background;
 
     .mat-flat-button, .mat-icon-button {
-      background-color: $app-dark-background;
-      color: $app-light-grey;
+      background-color: styles.$app-dark-background;
+      color: styles.$app-light-grey;
       font-weight: normal;
       font-size: 16px;
       text-decoration: none;

@@ -47,15 +47,14 @@
         </ng-container>
         <ng-container *ngSwitchCase="'chips'">
           <mat-form-field [hidden]="comp.hidden" gdColumn="span {{comp.span || 3}}">
-            <mat-chip-list #chipList aria-label="Chip selection">
-              <mat-chip
+            <mat-chip-grid #chipList aria-label="Chip selection">
+              <mat-chip-row
                 *ngFor="let object of formObject[comp.name]"
-                [selectable]="false"
                 [removable]="true"
                 (removed)="onChipRemoved(object, formObject[comp.name])">
                 {{object}}
                 <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip>
+              </mat-chip-row>
               <input
                   #chipInput
                   [formControl]="chipCtrl"
@@ -63,7 +62,7 @@
                   [matChipInputFor]="chipList"
                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                   (matChipInputTokenEnd)="onChipAdded($event, formObject[comp.name])">
-            </mat-chip-list>
+            </mat-chip-grid>
             <mat-autocomplete #chipAuto="matAutocomplete"
                               (optionSelected)="onChipSelected($event, formObject[comp.name])">
               <mat-option *ngFor="let option of comp.options" [value]="option.value">

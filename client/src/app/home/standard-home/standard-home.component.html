@@ -24,10 +24,10 @@
 
           <ng-container matColumnDef="state">
             <td mat-cell style="width:200px;" *matCellDef="let element">
-              <mat-chip-list>
-                <mat-chip (click)="onSelectChip(element)" color="{{mapState(element.state).color}}"
-                          selected>{{mapState(element.state).text}}</mat-chip>
-              </mat-chip-list>
+              <mat-chip-grid>
+                <mat-chip-row (click)="onSelectChip(element)" color="{{mapState(element.state).color}}"
+                          selected>{{mapState(element.state).text}}</mat-chip-row>
+              </mat-chip-grid>
             </td>
           </ng-container>
 

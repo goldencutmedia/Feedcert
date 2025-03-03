@@ -95,7 +95,7 @@ export class CompanyOverviewComponent implements OnInit {
       return;
     }
     const message = this.selected.name ? this.selected.name + ' wirklich löschen?' : 'Goete Partner wirklich löschen?';
-    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message).subscribe(result => {
+    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message)?.subscribe(result => {
       if (result) {
         console.log('Yes clicked');
         this.api.deleteEntity('companies', this.selected)
@@ -119,7 +119,7 @@ export class CompanyOverviewComponent implements OnInit {
 
   sendRegisterMail() {
     const message = this.selected ? 'Registrierungsmail an ' + this.selected.email + ' wirklich senden?' : 'Registrierungsmail wirklich senden?';
-    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message).subscribe(result => {
+    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message)?.subscribe(result => {
       if (result) {
         if (this.selected && this.selected.id) {
           this.companyservice.sendMail(Number(this.selected.id));

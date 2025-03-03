@@ -1,4 +1,4 @@
-@import '../../styles';
+@use '../../styles' as styles;
 
 
 .main-container {
@@ -15,5 +15,5 @@
 
 .colorbar {
   height: 50px;
-  background-color: mat-color($app-primary);
+  background-color: styles.$app-light-grey;
 }

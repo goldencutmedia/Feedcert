@@ -2,7 +2,7 @@ import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} f
 import {Router} from '@angular/router';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatChipInputEvent, MatChip, MatChipRemove, MatChipInput } from '@angular/material/chips';
+import { MatChipInputEvent, MatChip, MatChipRemove, MatChipInput, MatChipGrid, MatChipRow } from '@angular/material/chips';
 import { MatAutocomplete, MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
 import { FlexModule } from '@angular/flex-layout/flex';
 import { GridModule } from '@angular/flex-layout/grid';
@@ -24,31 +24,32 @@ import { MatButton } from '@angular/material/button';
     selector: 'app-base-form',
     templateUrl: './base-form.component.html',
     styleUrls: ['./base-form.component.scss'],
-    imports: [FormsModule, FlexModule, GridModule, MatCardContent, NgFor, NgSwitch, NgSwitchCase, MatLabel, MatCheckbox, MatFormField, MatInput, CdkTextareaAutosize, MatSelect, MatOption, MatChip, MatIcon, MatChipRemove, MatAutocompleteTrigger, MatChipInput, ReactiveFormsModule, MatAutocomplete, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatButtonToggleGroup, MatButtonToggle, AnalyticalResultComponent, NgSwitchDefault, NgIf, MatCardActions, MatButton]
+    imports: [FormsModule, FlexModule, GridModule, MatCardContent, NgFor, NgSwitch, NgSwitchCase, MatLabel, MatCheckbox, MatFormField, MatInput, CdkTextareaAutosize, MatSelect, MatOption, MatChip, MatIcon, MatChipRemove, MatAutocompleteTrigger, MatChipInput, ReactiveFormsModule, MatAutocomplete, MatDatepickerInput, MatDatepickerToggle, MatSuffix, MatDatepicker, MatButtonToggleGroup, MatButtonToggle, AnalyticalResultComponent, NgSwitchDefault, NgIf, MatCardActions, MatButton, MatChipGrid, MatChipRow]
 })
 export class BaseFormComponent implements OnInit {
-  @Input() formData!: {
-    fields?: [
-      {
-        type: string,
-        name?: string,
-        label?: string,
-        lines?: number,
-        span?: number,
-        required?: boolean,
-        readOnly?: boolean,
-        hidden?: boolean,
-        tab?: string,
-        options?: [
-          {
-            label: string,
-            value: string
-          }
-        ]
-      }
-    ],
-    buttons?: []
-  };
+  // @Input() formData: {
+  //   fields?: [
+  //     {
+  //       type: string,
+  //       name?: string,
+  //       label?: string,
+  //       lines?: number,
+  //       span?: number,
+  //       required?: boolean,
+  //       readOnly?: boolean,
+  //       hidden?: boolean,
+  //       tab?: string,
+  //       options?: [
+  //         {
+  //           label: string,
+  //           value: string
+  //         }
+  //       ]
+  //     }
+  //   ],
+  //   buttons?: []
+  // } = {};
+  @Input() formData: any;
   @Input() formObject: any;
   @Input() readOnly: any;
   @Input() buttons?: any;

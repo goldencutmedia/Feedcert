@@ -9,12 +9,13 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { AdminHomeComponent } from '../admin-home/admin-home.component';
 import { TaskforceHomeComponent } from '../taskforce-home/taskforce-home.component';
 import { StandardHomeComponent } from '../standard-home/standard-home.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
-    imports: [NgIf, AdminHomeComponent, TaskforceHomeComponent, StandardHomeComponent, AsyncPipe]
+    imports: [NgIf, AdminHomeComponent, TaskforceHomeComponent, StandardHomeComponent, AsyncPipe, MatProgressSpinnerModule]
 })
 export class HomeComponent implements OnInit {
 

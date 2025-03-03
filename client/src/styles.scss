@@ -1,66 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-@use '@angular/material' as mat;  // Correct syntax for Angular 17+
-@use 'variables' as variables;
+@use '@angular/material' as mat;
+@use '_theme-colors' as colors;
+@include mat.core();
 
-@include mat.core(); 
-
-$feedcert-scheme: (
-  50: #e4f0e0,
-  100: #bcd9b3,
-  200: #90c080,
-  300: #63a64d,
-  400: #419326,
-  500: #208000,
-  600: #1c7800,
-  700: #186d00,
-  800: #136300,
-  900: #0b5000,
-  A100: #8bff83,
-  A200: #5bff50,
-  A400: #2bff1d,
-  A700: #13ff03,
-  contrast: (
-    50: variables.$dark-primary-text,
-    100: variables.$dark-primary-text,
-    200: variables.$dark-primary-text,
-    300: variables.$dark-primary-text,
-    400: variables.$dark-primary-text,
-    500: variables.$light-primary-text,
-    600: variables.$light-primary-text,
-    700: variables.$light-primary-text,
-    800: variables.$light-primary-text,
-    900: variables.$light-primary-text,
-    A100: variables.$dark-primary-text,
-    A200: variables.$dark-primary-text,
-    A400: variables.$dark-primary-text,
-    A700: variables.$dark-primary-text,
+$app-theme: mat.define-theme((
+  color: (
+    theme-type: light, // oder dark
+    primary: mat.$azure-palette, // Verwende vordefinierte Palette
+    tertiary: mat.$blue-palette,
+    // Oder mit Custom-Palette:
+    // primary: colors.$primary-palette,
+    // tertiary: colors.$tertiary-palette
+  ),
+  typography: (
+    brand-family: 'Open Sans',
+    plain-family: 'Roboto',
+    bold-weight: 900,
+    medium-weight: 500,
+    regular-weight: 300
+  ),
+  density: (
+    scale: 0 // -4 bis +4
   )
-);
-
-$app-primary: mat.m2-define-palette(
-  $feedcert-scheme,
-  (
-    main: 500,
-    lighter: 100,
-    darker: 900
-  )
-);
-$app-accent: mat.m2-define-palette(
-  mat.$amber-palette, 
-  (
-    main: A200,
-    lighter: A100,
-    darker: A400
-  )
-);
-$app-theme: mat.m2-define-theme((
-  color: (primary: theme.$app-primary, accent: $app-accent)
 ));
 
-$app-light-grey: mat.m2-get-color-from-palette(theme.$app-primary, 50);
-$app-accent-color: mat.m2-get-color-from-palette(theme.$app-primary, 200);
+$app-dark-background: #3d3d3d;
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+$app-light-grey: mat.m2-get-color-from-palette(colors.$primary-palette, 50);
+$app-accent-color: mat.m2-get-color-from-palette(colors.$tertiary-palette, 50);
 
-@include mat.all-component-themes($app-theme);
+:root {
+  @include mat.all-component-themes($app-theme);
+}
 
 html,
 body {

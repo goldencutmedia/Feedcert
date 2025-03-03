@@ -27,6 +27,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
+import { DialogService } from '../services/dialog.service';
 
 
 registerLocaleData(localeDe, 'de', localeDeExtra);
@@ -52,6 +53,7 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
     providers: [
         ApiService,
         LoginService,
+        DialogService,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
         { provide: MAT_DATE_LOCALE, useValue: 'de-DE' },

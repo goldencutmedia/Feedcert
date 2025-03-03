@@ -1,4 +1,5 @@
-@import '../../../styles';
+@use '../../../styles' as styles;
+
 
 $sidebar-width: 55px;
 
@@ -14,7 +15,7 @@ $sidebar-width: 55px;
 
   max-width: $sidebar-width;
   width: $sidebar-width;
-  background-color: $app-dark-background;
+  background-color: styles.$app-dark-background;
 
   mat-nav-list {
     margin: 10px 0;

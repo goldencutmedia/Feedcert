@@ -1,8 +1,9 @@
-@import '../../../styles';
+@use '../../../styles' as styles;
+
 
 mat-list-item {
   text-align: center;
-  background-color: $app-dark-background;
+  background-color: styles.$app-dark-background;
   font-weight: normal;
   font-size: 18px;
   text-decoration: none;
@@ -12,7 +13,7 @@ mat-list-item {
   }
 
   mat-icon {
-    color: $app-light-grey;
+    color: styles.$app-light-grey;
     font-size: 18px;
   }
 

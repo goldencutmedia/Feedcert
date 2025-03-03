@@ -17,10 +17,10 @@
                 <i>{{supplier.number}}</i>
                 <img *ngIf="supplier.gopluszertified" src="../../../assets/img/Goete-Plus-Siegel.jpg"/>
               </p>
-              <mat-chip-list style="width:150px">
-                <mat-chip color="{{mapState(supplier.rating).color}}"
-                          selected>{{supplier.rating}}</mat-chip>
-              </mat-chip-list>
+              <mat-chip-grid style="width:150px">
+                <mat-chip-row color="{{mapState(+supplier.rating).color}}"
+                          selected>{{supplier.rating}}</mat-chip-row>
+              </mat-chip-grid>
               <mat-divider></mat-divider>
             </mat-list-item>
           </mat-list>

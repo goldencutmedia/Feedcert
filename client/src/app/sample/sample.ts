@@ -22,7 +22,7 @@ export class Sample {
   deliveredAs!: string;
   deliveredTo!: string;
   companyId!: string;
-  company!: {};
+  company!: any;
   documentIds!: string[];
   actions!: Action[];
   gvo!: number;

@@ -24,7 +24,7 @@ import { BaseFormComponent } from 'src/app/shared module/base-form/base-form.com
 })
 
 export class UserOverviewComponent implements OnInit {
-  users!: Object;
+  users: any[] = [];
   selected?: User;
   formData = USER_FORM_DATA;
 
@@ -41,7 +41,7 @@ export class UserOverviewComponent implements OnInit {
   private loadUsers() {
     this.api.getEntity('users')
       .subscribe(
-        (next) => {
+        (next: any) => {
           this.users = next;
           console.log(next);
         },

@@ -16,7 +16,7 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatList, MatListItem } from '@angular/material/list';
 import { ExtendedModule } from '@angular/flex-layout/extended';
 import { MatLine } from '@angular/material/core';
-import { MatChip } from '@angular/material/chips';
+import { MatChip, MatChipGrid, MatChipRow } from '@angular/material/chips';
 import { MatDivider } from '@angular/material/divider';
 import { BaseFormComponent } from '../../shared module/base-form/base-form.component';
 
@@ -24,7 +24,7 @@ import { BaseFormComponent } from '../../shared module/base-form/base-form.compo
     selector: 'app-supplier-overview',
     templateUrl: './supplier-overview.component.html',
     styleUrls: ['./supplier-overview.component.scss'],
-    imports: [NgIf, MatAnchor, MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatChip, MatDivider, BaseFormComponent, AsyncPipe]
+    imports: [NgIf, MatAnchor, MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatChip, MatDivider, BaseFormComponent, AsyncPipe, MatChipGrid, MatChipRow]
 })
 export class SupplierOverviewComponent implements OnInit {
   suppliers!: Supplier[];
@@ -99,7 +99,9 @@ export class SupplierOverviewComponent implements OnInit {
 
   deleteSupplier() {
     const message = this.selected.name + ' wirklich löschen?';
-    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message).subscribe(result => {
+    const dialogRef = this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message);
+    if(dialogRef) {
+    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message)?.subscribe(result => {
       if (result) {
         console.log('Yes clicked');
         this.api.deleteEntity('suppliers', this.selected)
@@ -117,6 +119,7 @@ export class SupplierOverviewComponent implements OnInit {
         this.file.deleteContainer(this.selected.number).subscribe();
       }
     });
+  }
   }
 
   newRating() {

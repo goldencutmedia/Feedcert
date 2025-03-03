@@ -17,7 +17,7 @@ import { FlexModule } from '@angular/flex-layout/flex';
 import { MatList, MatListItem } from '@angular/material/list';
 import { ExtendedModule } from '@angular/flex-layout/extended';
 import { MatLine, MatOption } from '@angular/material/core';
-import { MatChip } from '@angular/material/chips';
+import { MatChip, MatChipGrid, MatChipRow } from '@angular/material/chips';
 import { MatDivider } from '@angular/material/divider';
 import { MatTabGroup, MatTab } from '@angular/material/tabs';
 import { MatFormField } from '@angular/material/form-field';
@@ -30,7 +30,7 @@ import { SafePipe } from 'safe-pipe';
     selector: 'app-sample-overview',
     templateUrl: './sample-overview.component.html',
     styleUrls: ['./sample-overview.component.scss'],
-    imports: [NgIf, MatAnchor, MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatChip, MatDivider, MatTabGroup, MatTab, MatFormField, MatSelect, FormsModule, MatOption, BaseFormComponent, AsyncPipe, SafePipe]
+    imports: [NgIf, MatAnchor, MatGridList, MatGridTile, MatCard, MatCardContent, FlexModule, MatList, NgFor, MatListItem, NgClass, ExtendedModule, MatLine, MatChip, MatDivider, MatTabGroup, MatTab, MatFormField, MatSelect, FormsModule, MatOption, BaseFormComponent, AsyncPipe, SafePipe, MatChipGrid, MatChipRow]
 })
 export class SampleOverviewComponent implements OnInit {
   samples!: Sample[];
@@ -126,7 +126,7 @@ export class SampleOverviewComponent implements OnInit {
 
   deleteSample() {
     const message = this.selected ? this.selected.type + ' wirklich löschen?' : 'Sample wirklich löschen?';
-    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message).subscribe(result => {
+    this.dialog.showDialog(DIALOG_TYPE.CONFIRMATION, message)?.subscribe(result => {
       if (result) {
         this.api.deleteEntity('samples', this.selected)
           .subscribe(

@@ -1,12 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {ApiService} from '../services/api.service';
+import { MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
+import { SidebarComponent } from '../shared module/sidebar/sidebar.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  standalone: true
+  standalone: true,
+  imports: [RouterModule, MatDrawerContent, SidebarComponent, MatDrawer, MatDrawerContainer]
 })
 export class AppComponent implements OnInit {
   constructor(private router: Router, private api: ApiService) {
