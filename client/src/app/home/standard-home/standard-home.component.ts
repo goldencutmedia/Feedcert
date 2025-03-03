@@ -8,7 +8,7 @@ import { MatCard, MatCardHeader, MatCardTitle, MatCardContent } from '@angular/m
 import { MatTable, MatColumnDef, MatCellDef, MatCell, MatRowDef, MatRow } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { FlexModule } from '@angular/flex-layout/flex';
-import { MatChip, MatChipGrid, MatChipRow } from '@angular/material/chips';
+import { MatChipGrid, MatChipRow } from '@angular/material/chips';
 import { SummaryComponent } from '../summary/summary.component';
 import { DatePipe } from '@angular/common';
 
@@ -16,7 +16,7 @@ import { DatePipe } from '@angular/common';
     selector: 'app-standard-home',
     templateUrl: './standard-home.component.html',
     styleUrls: ['./standard-home.component.scss'],
-    imports: [MatGridList, MatGridTile, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatSort, FlexModule, MatColumnDef, MatCellDef, MatCell, MatChip, MatRowDef, MatRow, SummaryComponent, DatePipe, MatChipGrid, MatChipRow]
+    imports: [MatGridList, MatGridTile, MatCard, MatCardHeader, MatCardTitle, MatCardContent, MatTable, MatSort, FlexModule, MatColumnDef, MatCellDef, MatCell, MatRowDef, MatRow, SummaryComponent, DatePipe, MatChipGrid, MatChipRow]
 })
 export class StandardHomeComponent implements OnInit {
 

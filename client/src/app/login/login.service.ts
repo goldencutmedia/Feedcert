@@ -1,13 +1,13 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {ApiService} from '../services/api.service';
 import {Sample} from '../sample/sample';
-import * as moment from 'moment';
 import {Router} from '@angular/router';
 import {User} from '../user/User';
 import {BehaviorSubject} from 'rxjs';
 import {Company} from '../company/company-form/company';
 import {SnackbarService} from '../services/snackbar.service';
 import {environment} from '../../environments/environment';
+import dayjs from 'dayjs';
 
 
 @Injectable({
@@ -77,11 +77,12 @@ export class LoginService {
   static getExpiration() {
     const expiration = localStorage.getItem('expires_at');
     const expiresAt = expiration ? JSON.parse(expiration) : null;
-    return moment(expiresAt);
+    return dayjs(expiresAt).toDate();
+    ;
   }
 
   static isLoggedInCookie() {
-    const loggedIn = moment().isBefore(LoginService.getExpiration());
+    const loggedIn = dayjs().isBefore(LoginService.getExpiration());
     if (loggedIn) {
       return true;
     } else {
@@ -121,7 +122,7 @@ export class LoginService {
   setSession(loginResult: any) {
     this.setUser(loginResult.user);
     this.token = loginResult.token;
-    const expiresAt = moment().add(Number(loginResult.expiresIn.replace('h', '')), 'hour');
+    const expiresAt = dayjs().add(Number(loginResult.expiresIn.replace('h', '')), 'hour');
 
     localStorage.setItem('user', JSON.stringify(LoginService.user.getValue()));
     localStorage.setItem('id_token', this.token);
