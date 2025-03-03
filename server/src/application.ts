@@ -20,14 +20,23 @@ import {JWTService} from './services/jwt.service';
 import {BcryptHasher} from './services/hash.password.bcryptjs';
 import {MyUserService} from './services/user.service';
 import {LogMixin} from './mixins/log-level.mixin';
-import {Middleware} from '@loopback/rest';
 
 
 export class FeedcertApplication extends LogMixin(BootMixin(
     ServiceMixin(RepositoryMixin(RestApplication))),
 ) {
     constructor(options: ApplicationConfig = {}) {
-        super(options);
+        super({
+            rest: {
+              cors: {
+                origin: 'http://localhost:4200',
+                methods: ['GET', 'POST', 'OPTIONS'],
+                allowedHeaders: ['Content-Type', 'Authorization'],
+                credentials: true,
+                maxAge: 86400
+              }
+            }
+          });
 
         registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
 

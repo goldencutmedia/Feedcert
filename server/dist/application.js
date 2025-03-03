@@ -18,7 +18,17 @@ const user_service_1 = require("./services/user.service");
 const log_level_mixin_1 = require("./mixins/log-level.mixin");
 class FeedcertApplication extends (0, log_level_mixin_1.LogMixin)((0, boot_1.BootMixin)((0, service_proxy_1.ServiceMixin)((0, repository_1.RepositoryMixin)(rest_1.RestApplication)))) {
     constructor(options = {}) {
-        super(options);
+        super({
+            rest: {
+                cors: {
+                    origin: 'http://localhost:4200',
+                    methods: ['GET', 'POST', 'OPTIONS'],
+                    allowedHeaders: ['Content-Type', 'Authorization'],
+                    credentials: true,
+                    maxAge: 86400
+                }
+            }
+        });
         (0, authentication_1.registerAuthenticationStrategy)(this, jwt_strategy_1.JWTAuthenticationStrategy);
         // Set up the custom sequence
         this.sequence(sequence_1.MySequence);

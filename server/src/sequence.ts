@@ -1,14 +1,18 @@
-import {inject} from '@loopback/context';
+import {config, Context, inject} from '@loopback/context';
 import {
     FindRoute,
     InvokeMethod,
     ParseParams,
     Reject,
     RequestContext,
-    RestBindings,
     Send,
     SequenceHandler,
 } from '@loopback/rest';
+import {MiddlewareSequence} from '@loopback/rest';
+import {RestBindings} from '@loopback/rest';
+import {InvokeMiddleware} from '@loopback/rest';
+import {InvokeMiddlewareOptions} from '@loopback/rest';
+
 import {
     AuthenticateFn,
     AUTHENTICATION_STRATEGY_NOT_FOUND,
@@ -19,8 +23,13 @@ import {
 
 const SequenceActions = RestBindings.SequenceActions;
 
-export class MySequence implements SequenceHandler {
+export class MySequence extends MiddlewareSequence implements SequenceHandler {
     constructor(
+        @inject.context() context: Context,
+        @inject(RestBindings.INVOKE_MIDDLEWARE_SERVICE)
+        invokeMiddleware: InvokeMiddleware,
+        @config()
+        options: InvokeMiddlewareOptions = MiddlewareSequence.defaultOptions,
         @inject(SequenceActions.FIND_ROUTE) protected findRoute: FindRoute,
         @inject(SequenceActions.PARSE_PARAMS) protected parseParams: ParseParams,
         @inject(SequenceActions.INVOKE_METHOD) protected invoke: InvokeMethod,
@@ -28,7 +37,8 @@ export class MySequence implements SequenceHandler {
         @inject(SequenceActions.REJECT) public reject: Reject,
         @inject(AuthenticationBindings.AUTH_ACTION)
         protected authenticateRequest: AuthenticateFn,) {
-    }
+            super(context, invokeMiddleware, options);
+        }
 
     async handle(context: RequestContext) {
         try {
@@ -43,6 +53,7 @@ export class MySequence implements SequenceHandler {
             const args = await this.parseParams(request, route);
             const result = await this.invoke(route, args);
             this.send(response, result);
+            await super.handle(context);
         } catch (error) {
             if (
                 error.code === AUTHENTICATION_STRATEGY_NOT_FOUND ||

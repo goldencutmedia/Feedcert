@@ -1,11 +1,11 @@
-import {Count, CountSchema, repository, Where,} from '@loopback/repository';
-import {del, get, getModelSchemaRef, getWhereSchemaFor, param, patch, post, put, requestBody} from '@loopback/rest';
-import {Credentials, User} from '../models';
-import {CompanyRepository, UserRepository} from '../repositories';
-import {inject} from '@loopback/context';
-import {TokenServiceBindings, UserServiceBindings} from '../keys';
-import {authenticate, TokenService, UserService} from '@loopback/authentication';
-import {CredentialsRequestBody} from './specs/user-controller.specs';
+import { Count, CountSchema, repository, Where, } from '@loopback/repository';
+import { del, get, getModelSchemaRef, getWhereSchemaFor, param, patch, post, put, requestBody, RestBindings, Response } from '@loopback/rest';
+import { Credentials, User } from '../models';
+import { CompanyRepository, UserRepository } from '../repositories';
+import { inject } from '@loopback/context';
+import { TokenServiceBindings, UserServiceBindings } from '../keys';
+import { authenticate, TokenService, UserService } from '@loopback/authentication';
+import { CredentialsRequestBody } from './specs/user-controller.specs';
 
 
 export class UserResult {
@@ -26,16 +26,16 @@ export class UserController {
         public userService: UserService<User, Credentials>,
         @inject(TokenServiceBindings.TOKEN_EXPIRES_IN)
         private jwtExpiresIn: string,
+        @inject(RestBindings.Http.RESPONSE) private response: Response,
     ) {
     }
-
 
     @authenticate('jwt')
     @post('/users', {
         responses: {
             '200': {
                 description: 'User model instance',
-                content: {'application/json': {schema: getModelSchemaRef(User)}},
+                content: { 'application/json': { schema: getModelSchemaRef(User) } },
             },
         },
     })
@@ -43,11 +43,11 @@ export class UserController {
         @requestBody({
             content: {
                 'application/json': {
-                    schema: getModelSchemaRef(User, {exclude: ['id']}),
+                    schema: getModelSchemaRef(User, { exclude: ['id'] }),
                 },
             },
         })
-            user: Omit<User, 'id'>,
+        user: Omit<User, 'id'>,
     ): Promise<User> {
         return this.userRepository.create(user);
     }
@@ -57,7 +57,7 @@ export class UserController {
         responses: {
             '200': {
                 description: 'User model count',
-                content: {'application/json': {schema: CountSchema}},
+                content: { 'application/json': { schema: CountSchema } },
             },
         },
     })
@@ -74,7 +74,7 @@ export class UserController {
                 description: 'Array of User model instances',
                 content: {
                     'application/json': {
-                        schema: {type: 'array', items: getModelSchemaRef(UserResult)},
+                        schema: { type: 'array', items: getModelSchemaRef(UserResult) },
                     },
                 },
             },
@@ -89,7 +89,7 @@ export class UserController {
 
                     Object.assign(tempUser, user);
 
-                    const company = await this.companyRepository.findOne({where: {id: user.companyId}});
+                    const company = await this.companyRepository.findOne({ where: { id: user.companyId } });
                     tempUser.company = company && company.name;
                     users.push(tempUser);
                 }
@@ -103,7 +103,7 @@ export class UserController {
         responses: {
             '200': {
                 description: 'User PATCH success count',
-                content: {'application/json': {schema: CountSchema}},
+                content: { 'application/json': { schema: CountSchema } },
             },
         },
     })
@@ -111,11 +111,11 @@ export class UserController {
         @requestBody({
             content: {
                 'application/json': {
-                    schema: getModelSchemaRef(User, {partial: true}),
+                    schema: getModelSchemaRef(User, { partial: true }),
                 },
             },
         })
-            user: User,
+        user: User,
         @param.query.object('where', getWhereSchemaFor(User)) where?: Where<User>,
     ): Promise<Count> {
         return this.userRepository.updateAll(user, where);
@@ -126,7 +126,7 @@ export class UserController {
         responses: {
             '200': {
                 description: 'User model instance',
-                content: {'application/json': {schema: getModelSchemaRef(User)}},
+                content: { 'application/json': { schema: getModelSchemaRef(User) } },
             },
         },
     })
@@ -147,11 +147,11 @@ export class UserController {
         @requestBody({
             content: {
                 'application/json': {
-                    schema: getModelSchemaRef(UserResult, {partial: true}),
+                    schema: getModelSchemaRef(UserResult, { partial: true }),
                 },
             },
         })
-            userResult: UserResult,
+        userResult: UserResult,
     ): Promise<void> {
         if (userResult && userResult.company) {
             delete userResult.company;
@@ -186,6 +186,7 @@ export class UserController {
         await this.userRepository.deleteById(id);
     }
 
+
     @post('/users/login', {
         responses: {
             '200': {
@@ -208,6 +209,12 @@ export class UserController {
                         },
                     },
                 },
+                headers: {
+                    'Access-Control-Allow-Origin': {
+                        schema: { type: 'string' },
+                        description: 'http://localhost:4200',
+                    },
+                },
             },
         },
     })
@@ -228,6 +235,9 @@ export class UserController {
         // create a JSON Web Token based on the user profile
         const token = await this.jwtService.generateToken(userProfile);
 
-        return {token, expiresIn: this.jwtExpiresIn, user: JSON.stringify(userProfile)};
+        this.response.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+        this.response.header('Access-Control-Allow-Credentials', 'true');
+
+        return { token, expiresIn: this.jwtExpiresIn, user: JSON.stringify(userProfile) };
     }
 }

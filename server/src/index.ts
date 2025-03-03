@@ -1,13 +1,13 @@
-import {FeedcertApplication} from './application';
-import {ApplicationConfig} from '@loopback/core';
-import {StorageServiceProvider} from './providers';
+import { FeedcertApplication } from './application';
+import { ApplicationConfig } from '@loopback/core';
+import { StorageServiceProvider } from './providers';
 import fs from 'fs';
 
-export {FeedcertApplication};
+export { FeedcertApplication };
 
 export async function main(options: ApplicationConfig = {}) {
     let cert;
-    if(process.env.CERT) {
+    if (process.env.CERT) {
         cert = fs.readFileSync(process.env.CERT);
     }
     const config = {

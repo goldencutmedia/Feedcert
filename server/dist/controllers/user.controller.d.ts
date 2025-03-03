@@ -1,4 +1,5 @@
 import { Count, Where } from '@loopback/repository';
+import { Response } from '@loopback/rest';
 import { Credentials, User } from '../models';
 import { CompanyRepository, UserRepository } from '../repositories';
 import { TokenService, UserService } from '@loopback/authentication';
@@ -15,7 +16,8 @@ export declare class UserController {
     jwtService: TokenService;
     userService: UserService<User, Credentials>;
     private jwtExpiresIn;
-    constructor(userRepository: UserRepository, companyRepository: CompanyRepository, jwtService: TokenService, userService: UserService<User, Credentials>, jwtExpiresIn: string);
+    private response;
+    constructor(userRepository: UserRepository, companyRepository: CompanyRepository, jwtService: TokenService, userService: UserService<User, Credentials>, jwtExpiresIn: string, response: Response);
     create(user: Omit<User, 'id'>): Promise<User>;
     count(where?: Where<User>): Promise<Count>;
     find(): Promise<UserResult[]>;

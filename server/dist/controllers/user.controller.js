@@ -14,12 +14,13 @@ class UserResult {
 }
 exports.UserResult = UserResult;
 let UserController = class UserController {
-    constructor(userRepository, companyRepository, jwtService, userService, jwtExpiresIn) {
+    constructor(userRepository, companyRepository, jwtService, userService, jwtExpiresIn, response) {
         this.userRepository = userRepository;
         this.companyRepository = companyRepository;
         this.jwtService = jwtService;
         this.userService = userService;
         this.jwtExpiresIn = jwtExpiresIn;
+        this.response = response;
     }
     async create(user) {
         return this.userRepository.create(user);
@@ -69,6 +70,8 @@ let UserController = class UserController {
         }
         // create a JSON Web Token based on the user profile
         const token = await this.jwtService.generateToken(userProfile);
+        this.response.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+        this.response.header('Access-Control-Allow-Credentials', 'true');
         return { token, expiresIn: this.jwtExpiresIn, user: JSON.stringify(userProfile) };
     }
 };
@@ -237,6 +240,12 @@ tslib_1.__decorate([
                         },
                     },
                 },
+                headers: {
+                    'Access-Control-Allow-Origin': {
+                        schema: { type: 'string' },
+                        description: 'http://localhost:4200',
+                    },
+                },
             },
         },
     }),
@@ -251,7 +260,8 @@ exports.UserController = UserController = tslib_1.__decorate([
     tslib_1.__param(2, (0, context_1.inject)(keys_1.TokenServiceBindings.TOKEN_SERVICE)),
     tslib_1.__param(3, (0, context_1.inject)(keys_1.UserServiceBindings.USER_SERVICE)),
     tslib_1.__param(4, (0, context_1.inject)(keys_1.TokenServiceBindings.TOKEN_EXPIRES_IN)),
+    tslib_1.__param(5, (0, context_1.inject)(rest_1.RestBindings.Http.RESPONSE)),
     tslib_1.__metadata("design:paramtypes", [repositories_1.UserRepository,
-        repositories_1.CompanyRepository, Object, Object, String])
+        repositories_1.CompanyRepository, Object, Object, String, Object])
 ], UserController);
 //# sourceMappingURL=user.controller.js.map
