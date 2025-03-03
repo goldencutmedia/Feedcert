@@ -14,9 +14,7 @@ import {CoreModule} from '@angular/flex-layout';
 
 
 import {SampleModule} from '../sample/sample.module';
-import {ConfirmationDialogComponent} from '../shared module/confirmation-dialog/confirmation-dialog.component';
 
-import {FormDialogComponent} from '../shared module/form-dialog/form-dialog.component';
 
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MAT_DATE_LOCALE} from '@angular/material/core';
@@ -24,6 +22,12 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../interceptors/auth.interceptor';
 import {ErrorInterceptor} from '../interceptors/error.interceptor';
 import {LoginService} from '../login/login.service';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatGridListModule } from '@angular/material/grid-list';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 registerLocaleData(localeDe, 'de', localeDeExtra);
 
@@ -38,7 +42,12 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
     FontAwesomeModule,
     SampleModule,
     MatSidenavModule,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    MatChipsModule,
+    MatCardModule,
+    MatGridListModule,
+    MatListModule,
+    MatDividerModule,
 ],
     providers: [
         ApiService,

@@ -28,18 +28,18 @@ import { MatButton } from '@angular/material/button';
 })
 export class BaseFormComponent implements OnInit {
   @Input() formData!: {
-    fields: [
+    fields?: [
       {
         type: string,
-        name: string,
-        label: string,
-        lines: number,
-        span: number,
-        required: boolean,
-        readOnly: boolean,
-        hidden: boolean,
-        tab: string,
-        options: [
+        name?: string,
+        label?: string,
+        lines?: number,
+        span?: number,
+        required?: boolean,
+        readOnly?: boolean,
+        hidden?: boolean,
+        tab?: string,
+        options?: [
           {
             label: string,
             value: string

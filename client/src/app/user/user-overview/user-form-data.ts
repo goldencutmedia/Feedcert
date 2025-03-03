@@ -70,6 +70,4 @@ export const USER_FORM_DATA = {
       ],
       span: 2
     },
-  ],
-  buttons: ['DELETE', 'SAVE']
-};
+  ]};

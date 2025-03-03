@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @use '@angular/material' as mat;  // Correct syntax for Angular 17+
-@use 'variables';
-@use './theme' as theme;
+@use 'variables' as variables;
 
 @include mat.core(); 
 
@@ -21,24 +20,24 @@ $feedcert-scheme: (
   A400: #2bff1d,
   A700: #13ff03,
   contrast: (
-    50: mat.$dark-primary-text,
-    100: mat.$dark-primary-text,
-    200: mat.$dark-primary-text,
-    300: mat.$dark-primary-text,
-    400: mat.$dark-primary-text,
-    500: mat.$light-primary-text,
-    600: mat.$light-primary-text,
-    700: mat.$light-primary-text,
-    800: mat.$light-primary-text,
-    900: mat.$light-primary-text,
-    A100: mat.$dark-primary-text,
-    A200: mat.$dark-primary-text,
-    A400: mat.$dark-primary-text,
-    A700: mat.$dark-primary-text,
+    50: variables.$dark-primary-text,
+    100: variables.$dark-primary-text,
+    200: variables.$dark-primary-text,
+    300: variables.$dark-primary-text,
+    400: variables.$dark-primary-text,
+    500: variables.$light-primary-text,
+    600: variables.$light-primary-text,
+    700: variables.$light-primary-text,
+    800: variables.$light-primary-text,
+    900: variables.$light-primary-text,
+    A100: variables.$dark-primary-text,
+    A200: variables.$dark-primary-text,
+    A400: variables.$dark-primary-text,
+    A700: variables.$dark-primary-text,
   )
 );
 
-$app-primary: mat.define-palette(
+$app-primary: mat.m2-define-palette(
   $feedcert-scheme,
   (
     main: 500,
@@ -46,7 +45,7 @@ $app-primary: mat.define-palette(
     darker: 900
   )
 );
-$app-accent: mat.define-palette(
+$app-accent: mat.m2-define-palette(
   mat.$amber-palette, 
   (
     main: A200,
@@ -54,9 +53,12 @@ $app-accent: mat.define-palette(
     darker: A400
   )
 );
-$app-theme: mat.define-theme((
+$app-theme: mat.m2-define-theme((
   color: (primary: theme.$app-primary, accent: $app-accent)
 ));
+
+$app-light-grey: mat.m2-get-color-from-palette(theme.$app-primary, 50);
+$app-accent-color: mat.m2-get-color-from-palette(theme.$app-primary, 200);
 
 @include mat.all-component-themes($app-theme);
 

@@ -9,12 +9,14 @@ import {UserViewComponent} from './user-view/user-view.component';
 import {RouterModule} from "@angular/router";
 
 
+
 @NgModule({
     imports: [
     CommonModule,
     UserRoutingModule,
     RouterModule,
-    UserOverviewComponent, UserViewComponent
+    UserOverviewComponent,
+    UserViewComponent
 ]
 })
 export class UserModule {

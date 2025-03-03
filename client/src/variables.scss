@@ -1,5 +1,7 @@
-@use './styles/theme' as theme;  // Namespace import
+@use '@angular/material' as mat;  // Correct syntax for Angular 17+
+
 
 $app-dark-background: #3d3d3d;
-$app-light-grey: mat.get-color-from-palette(theme.$app-primary, 50);
-$app-accent-color: mat.get-color-from-palette(theme.$app-accent, 200);
+$dark-primary-text: rgba(black, 0.87);
+$light-primary-text: white;
+

@@ -23,6 +23,7 @@
       <mat-card *ngIf="selected != undefined" class="dashboard-card">
         <app-base-form
           [formData]="formData"
+          [buttons]="['DELETE', 'SAVE']"
           [formObject]="selected"
           (save)="addUser()"
           (delete)="deleteUser()"
