@@ -1,4 +1,4 @@
-import { ApplicationConfig } from '@loopback/core';
+import { ApplicationConfig, BindingScope, Context } from '@loopback/core';
 import { RestApplication } from '@loopback/rest';
 import { LOG_LEVEL } from './keys';
 declare const FeedcertApplication_base: {
@@ -33,8 +33,8 @@ declare const FeedcertApplication_base: {
     interceptor: (interceptor: import("@loopback/core").Interceptor | import("@loopback/core").Constructor<import("@loopback/core").Provider<import("@loopback/core").Interceptor>>, nameOrOptions?: string | import("@loopback/core").InterceptorBindingOptions | undefined) => import("@loopback/boot").Binding<import("@loopback/core").Interceptor>;
     readonly name: string;
     readonly subscriptionManager: import("@loopback/core").ContextSubscriptionManager;
-    scope: import("@loopback/core").BindingScope;
-    readonly parent: import("@loopback/core").Context | undefined;
+    scope: BindingScope;
+    readonly parent: Context | undefined;
     emitEvent: <T_5 extends import("@loopback/core").ContextEvent>(type: string, event: T_5) => void;
     emitError: (err: unknown) => void;
     bind: <ValueType = any>(key: import("@loopback/core").BindingAddress<ValueType>) => import("@loopback/boot").Binding<ValueType>;
@@ -51,10 +51,10 @@ declare const FeedcertApplication_base: {
     createView: <T_6 = unknown>(filter: import("@loopback/core").BindingFilter, comparator?: import("@loopback/core").BindingComparator | undefined, options?: Omit<import("@loopback/core").ResolutionOptions, "session"> | undefined) => import("@loopback/core").ContextView<T_6>;
     contains: (key: import("@loopback/core").BindingAddress) => boolean;
     isBound: (key: import("@loopback/core").BindingAddress) => boolean;
-    getOwnerContext: (keyOrBinding: Readonly<import("@loopback/boot").Binding<unknown>> | import("@loopback/core").BindingAddress) => import("@loopback/core").Context | undefined;
-    getScopedContext: (scope: import("@loopback/core").BindingScope.APPLICATION | import("@loopback/core").BindingScope.SERVER | import("@loopback/core").BindingScope.REQUEST) => import("@loopback/core").Context | undefined;
-    getResolutionContext: (binding: Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
-    isVisibleTo: (ctx: import("@loopback/core").Context) => boolean;
+    getOwnerContext: (keyOrBinding: Readonly<import("@loopback/boot").Binding<unknown>> | import("@loopback/core").BindingAddress) => Context | undefined;
+    getScopedContext: (scope: BindingScope.APPLICATION | BindingScope.SERVER | BindingScope.REQUEST) => Context | undefined;
+    getResolutionContext: (binding: Readonly<import("@loopback/boot").Binding<unknown>>) => Context | undefined;
+    isVisibleTo: (ctx: Context) => boolean;
     find: <ValueType_1 = any>(pattern?: string | RegExp | import("@loopback/core").BindingFilter | undefined) => Readonly<import("@loopback/boot").Binding<ValueType_1>>[];
     findByTag: <ValueType_2 = any>(tagFilter: RegExp | import("@loopback/core").BindingTag) => Readonly<import("@loopback/boot").Binding<ValueType_2>>[];
     get: {
@@ -210,7 +210,7 @@ declare const FeedcertApplication_base: {
     interceptor: (interceptor: import("@loopback/core").Interceptor | import("@loopback/core").Constructor<import("@loopback/core").Provider<import("@loopback/core").Interceptor>>, nameOrOptions?: string | import("@loopback/core").InterceptorBindingOptions | undefined) => import("@loopback/boot").Binding<import("@loopback/core").Interceptor>;
     readonly name: string;
     readonly subscriptionManager: import("@loopback/core").ContextSubscriptionManager;
-    scope: import("@loopback/core").BindingScope;
+    scope: BindingScope;
     readonly parent: import("@loopback/core").Context | undefined;
     emitEvent: <T_5 extends import("@loopback/core").ContextEvent>(type: string, event: T_5) => void;
     emitError: (err: unknown) => void;
@@ -229,7 +229,7 @@ declare const FeedcertApplication_base: {
     contains: (key: import("@loopback/core").BindingAddress) => boolean;
     isBound: (key: import("@loopback/core").BindingAddress) => boolean;
     getOwnerContext: (keyOrBinding: import("@loopback/core").BindingAddress | Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
-    getScopedContext: (scope: import("@loopback/core").BindingScope.APPLICATION | import("@loopback/core").BindingScope.SERVER | import("@loopback/core").BindingScope.REQUEST) => import("@loopback/core").Context | undefined;
+    getScopedContext: (scope: BindingScope.APPLICATION | BindingScope.SERVER | BindingScope.REQUEST) => import("@loopback/core").Context | undefined;
     getResolutionContext: (binding: Readonly<import("@loopback/boot").Binding<unknown>>) => import("@loopback/core").Context | undefined;
     isVisibleTo: (ctx: import("@loopback/core").Context) => boolean;
     find: <ValueType_1 = any>(pattern?: string | RegExp | import("@loopback/core").BindingFilter | undefined) => Readonly<import("@loopback/boot").Binding<ValueType_1>>[];
@@ -277,6 +277,8 @@ declare const FeedcertApplication_base: {
 }) & typeof RestApplication;
 export declare class FeedcertApplication extends FeedcertApplication_base {
     constructor(options?: ApplicationConfig);
+    private configureMiddleware;
+    private instantiateHttpContext;
     private setUpBindings;
 }
 export {};

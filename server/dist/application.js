@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FeedcertApplication = void 0;
 const tslib_1 = require("tslib");
 const boot_1 = require("@loopback/boot");
+const core_1 = require("@loopback/core");
 const rest_explorer_1 = require("@loopback/rest-explorer");
 const repository_1 = require("@loopback/repository");
 const rest_1 = require("@loopback/rest");
@@ -19,17 +20,20 @@ const log_level_mixin_1 = require("./mixins/log-level.mixin");
 class FeedcertApplication extends (0, log_level_mixin_1.LogMixin)((0, boot_1.BootMixin)((0, service_proxy_1.ServiceMixin)((0, repository_1.RepositoryMixin)(rest_1.RestApplication)))) {
     constructor(options = {}) {
         super({
+            ...options,
             rest: {
                 cors: {
-                    origin: 'http://localhost:4200',
-                    methods: ['GET', 'POST', 'OPTIONS'],
-                    allowedHeaders: ['Content-Type', 'Authorization'],
-                    credentials: true,
+                    origin: '*', // Explizite Origin-Angabe
+                    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+                    allowedHeaders: 'Content-Type,Authorization,X-Requested-With',
+                    credentials: true, // Für Cookies/JWT
+                    preflightContinue: false,
                     maxAge: 86400
                 }
             }
         });
         (0, authentication_1.registerAuthenticationStrategy)(this, jwt_strategy_1.JWTAuthenticationStrategy);
+        this.configureMiddleware();
         // Set up the custom sequence
         this.sequence(sequence_1.MySequence);
         // Set up default homeView page
@@ -49,6 +53,27 @@ class FeedcertApplication extends (0, log_level_mixin_1.LogMixin)((0, boot_1.Boo
             },
         };
         console.log('Startup-Sequence Done.');
+    }
+    configureMiddleware() {
+        this.configure(rest_1.RestBindings.SEQUENCE).to({
+            chain: 'middlewareChain.rest',
+            orderedGroups: [
+                'sendResponse',
+                'cors',
+                'apiSpec',
+                'findRoute',
+                'authentication',
+                'parseParams',
+                'invokeMethod'
+            ]
+        });
+        // RequestContext explizit binden
+        this.bind(rest_1.RestBindings.Http.CONTEXT)
+            .toDynamicValue(() => this.instantiateHttpContext())
+            .inScope(core_1.BindingScope.SINGLETON);
+    }
+    instantiateHttpContext() {
+        return new core_1.Context(this, 'http.request');
     }
     setUpBindings() {
         // Customize @loopback/rest-explorer configuration here

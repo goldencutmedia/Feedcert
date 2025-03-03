@@ -1,13 +1,13 @@
-import {BootMixin} from '@loopback/boot';
-import {ApplicationConfig} from '@loopback/core';
-import {RestExplorerBindings, RestExplorerComponent,} from '@loopback/rest-explorer';
-import {RepositoryMixin} from '@loopback/repository';
-import {RestApplication} from '@loopback/rest';
-import {ServiceMixin} from '@loopback/service-proxy';
+import { BootMixin } from '@loopback/boot';
+import { ApplicationConfig, BindingScope, Context } from '@loopback/core';
+import { RestExplorerBindings, RestExplorerComponent, } from '@loopback/rest-explorer';
+import { RepositoryMixin } from '@loopback/repository';
+import { RestApplication, RestBindings } from '@loopback/rest';
+import { ServiceMixin } from '@loopback/service-proxy';
 import * as path from 'path';
-import {MySequence} from './sequence';
-import {AuthenticationComponent, registerAuthenticationStrategy} from '@loopback/authentication';
-import {JWTAuthenticationStrategy} from './authentication-strategies/jwt.strategy';
+import { MySequence } from './sequence';
+import { AuthenticationComponent, registerAuthenticationStrategy } from '@loopback/authentication';
+import { JWTAuthenticationStrategy } from './authentication-strategies/jwt.strategy';
 import {
     LOG_LEVEL,
     LogBindings,
@@ -16,23 +16,26 @@ import {
     TokenServiceConstants,
     UserServiceBindings
 } from './keys';
-import {JWTService} from './services/jwt.service';
-import {BcryptHasher} from './services/hash.password.bcryptjs';
-import {MyUserService} from './services/user.service';
-import {LogMixin} from './mixins/log-level.mixin';
+import { JWTService } from './services/jwt.service';
+import { BcryptHasher } from './services/hash.password.bcryptjs';
+import { MyUserService } from './services/user.service';
+import { LogMixin } from './mixins/log-level.mixin';
 
 
 export class FeedcertApplication extends LogMixin(BootMixin(
     ServiceMixin(RepositoryMixin(RestApplication))),
 ) {
     constructor(options: ApplicationConfig = {}) {
+
         super({
+            ...options,
             rest: {
               cors: {
-                origin: 'http://localhost:4200',
-                methods: ['GET', 'POST', 'OPTIONS'],
-                allowedHeaders: ['Content-Type', 'Authorization'],
-                credentials: true,
+                origin: '*', // Explizite Origin-Angabe
+                methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+                allowedHeaders: 'Content-Type,Authorization,X-Requested-With',
+                credentials: true, // Für Cookies/JWT
+                preflightContinue: false,
                 maxAge: 86400
               }
             }
@@ -40,6 +43,7 @@ export class FeedcertApplication extends LogMixin(BootMixin(
 
         registerAuthenticationStrategy(this, JWTAuthenticationStrategy);
 
+        this.configureMiddleware();
         // Set up the custom sequence
         this.sequence(MySequence);
 
@@ -66,8 +70,31 @@ export class FeedcertApplication extends LogMixin(BootMixin(
         console.log('Startup-Sequence Done.');
     }
 
+    private configureMiddleware() {
+        this.configure(RestBindings.SEQUENCE).to({
+            chain: 'middlewareChain.rest',
+            orderedGroups: [
+                'sendResponse',
+                'cors',
+                'apiSpec',
+                'findRoute',
+                'authentication',
+                'parseParams',
+                'invokeMethod'
+            ]
+        });
+
+        // RequestContext explizit binden
+        this.bind(RestBindings.Http.CONTEXT)
+            .toDynamicValue(() => this.instantiateHttpContext())
+            .inScope(BindingScope.SINGLETON);
+    }
+    private instantiateHttpContext(): Context {
+        return new Context(this, 'http.request');
+    }
+
     private setUpBindings() {
-// Customize @loopback/rest-explorer configuration here
+        // Customize @loopback/rest-explorer configuration here
         this.bind(RestExplorerBindings.CONFIG).to({
             path: '/explorer',
             useSelfHostedSpec: false
